@@ -336,23 +336,7 @@
             display: none;
         }
         
-        /* MİNİ OYUN ALANI STİLİ */
-        #mini-game {
-            background: linear-gradient(180deg, var(--light-bg) 0%, #e9ecef 100%); 
-            padding-top: 40px;
-            padding-bottom: 40px;
-        }
-
-        #mini-game h2 {
-            color: var(--dark-bg);
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        
-        #mini-game #game-result {
-            min-height: 25px; 
-            transition: color 0.5s;
-        }
+        /* MİNİ OYUN ALANI (Index'ten kaldırıldı, sadece Challenge Merkezi'nde kalacak) */
         
         /* FOOTER */
         footer {
@@ -475,10 +459,6 @@
                 width: 100%;
                 margin: 5px 0;
             }
-            
-            #mini-game #guess-input {
-                width: 90%; 
-            }
         }
     </style>
 </head>
@@ -500,7 +480,7 @@
                 <ul>
                     <li><a href="#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
-                    <li><a href="sss.html">SSS</a></li>
+                    <li><a href="oyunlar.html">Challenge Merkezi</a></li> <li><a href="sss.html">SSS</a></li>
                     <li><a href="iletisim.html" class="btn btn-primary">Hemen Başla</a></li>
                 </ul>
             </nav>
@@ -576,21 +556,7 @@
             </form>
         </div>
     </section>
-
-    <section id="mini-game" class="section-padding">
-        <div class="container" style="text-align: center;">
-            <h2><i class="fas fa-brain"></i> Günlük Fitness Tahmin Oyunu</h2>
-            <p>Bugün kaç adım attığınızı veya kaç kilo ağırlık kaldırdığınızı tahmin edin! Bakalım sezgileriniz ne kadar güçlü?</p>
-
-            <div id="game-container" style="max-width: 500px; margin: 30px auto; padding: 25px; border: 2px solid var(--accent-color); border-radius: 10px; background-color: white;">
-                <label for="guess-input" style="display: block; font-size: 1.2em; margin-bottom: 10px; font-weight: bold;">Tahmininiz (Örn: 8000 Adım veya 100 kg Bench):</label>
-                <input type="number" id="guess-input" placeholder="Bir sayı girin..." min="1" required style="width: 70%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
-                <button id="submit-guess" class="btn btn-primary" style="margin-top: 20px; width: 100%;"><i class="fas fa-chart-line"></i> Tahmin Et!</button>
-                
-                <p id="game-result" style="margin-top: 20px; font-weight: bold; font-size: 1.1em;"></p>
-            </div>
-        </div>
-    </section>
+    
     <footer>
         <div class="container">
             <p>&copy; <span id="current-year">2025</span> FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
@@ -683,50 +649,6 @@
                     }
                 });
             });
-        });
-
-        // ===================================
-        // MİNİ OYUN İŞLEVİ
-        // ===================================
-        const guessInput = document.getElementById('guess-input');
-        const submitButton = document.getElementById('submit-guess');
-        const resultText = document.getElementById('game-result');
-        const rootStyles = getComputedStyle(document.documentElement);
-        
-        // CSS değişkenlerini JS'de kullanmak için
-        const secondaryColor = rootStyles.getPropertyValue('--secondary-color').trim();
-        const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
-        const errorColor = '#dc3545'; // Kırmızı
-
-        // Oyunun hedef değeri
-        const targetValue = 8500; 
-
-        submitButton.addEventListener('click', () => {
-            const userGuess = parseInt(guessInput.value);
-            resultText.style.color = 'inherit'; 
-
-            if (isNaN(userGuess) || userGuess <= 0) {
-                resultText.textContent = "Lütfen geçerli bir sayı girin.";
-                resultText.style.color = errorColor;
-                return;
-            }
-
-            // Tahmin farkını hesapla
-            const difference = Math.abs(userGuess - targetValue);
-
-            if (userGuess === targetValue) {
-                resultText.textContent = "🎯 MÜKEMMEL ATIŞ! Sezgileriniz tam isabetli!";
-                resultText.style.color = secondaryColor;
-            } else if (difference <= 500) {
-                resultText.textContent = `🔥 Sadece ${difference} farkla kaçırdınız! Müthiş bir gün geçirdiğiniz kesin.`;
-                resultText.style.color = '#ffc107'; // Sarı
-            } else if (userGuess > targetValue) {
-                resultText.textContent = `🚀 Vay canına, bugün hedefi aştınız! Enerjiniz tavan! (${userGuess} tahmini)`;
-                resultText.style.color = primaryColor;
-            } else {
-                resultText.textContent = `💪 Tahmininiz (${userGuess}), hedefin biraz altında. Yarın daha güçlü bir başlangıç yapın!`;
-                resultText.style.color = errorColor; 
-            }
         });
     </script>
 

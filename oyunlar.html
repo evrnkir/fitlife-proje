@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife | Fitness Challenge Merkezi</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ----------------------------------- */
+        /* GENEL AYARLAR VE RENKLER */
+        /* ----------------------------------- */
+        :root {
+            --primary-color: #007bff; 
+            --secondary-color: #28a745; 
+            --dark-bg: #212529; 
+            --light-bg: #f8f9fa; 
+            --accent-color: #ffc107; 
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --game-card-color: #dee2e6;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            width: 90%; 
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+        }
+        
+        .section-padding {
+            padding: 60px 0; 
+        }
+
+        /* ----------------------------------- */
+        /* BAŞLIK VE NAVİGASYON (KOMPAKT STICKY) */
+        /* ----------------------------------- */
+        header {
+            background: var(--dark-bg);
+            color: white;
+            padding: 8px 0; 
+            border-bottom: var(--primary-color) 4px solid;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky; 
+            top: 0;           
+            z-index: 1000;    
+            transition: top 0.3s ease-in-out; 
+        }
+
+        .header-hidden {
+            top: -100px !important; 
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9em; 
+            transition: color 0.3s;
+        }
+        
+        header h1 {
+            font-size: 1.6em; 
+            float: left;
+        }
+
+        header ul {
+            padding: 0;
+            list-style: none;
+            float: right;
+            margin-top: 5px;
+        }
+
+        header li {
+            display: inline-block;
+            padding: 0 10px; 
+        }
+        
+        /* Hamburger Menü Butonu */
+        .menu-toggle {
+            display: none; 
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin: 5px; 
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        
+        /* OYUN ALANI STİLLERİ */
+        #games-section {
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+
+        #games-section h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        
+        .game-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .game-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--secondary-color);
+            text-align: left;
+        }
+        
+        .game-card h3 {
+            color: var(--dark-bg);
+            font-size: 1.8em;
+            margin-top: 0;
+            border-bottom: 1px dashed var(--game-card-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* ----------------------------------- */
+        /* TAHMİN OYUNU STİLLERİ */
+        /* ----------------------------------- */
+        #guess-game-container input[type="number"] {
+            width: 70%; 
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            text-align: center;
+        }
+        
+        #guess-game-container button {
+            margin-top: 15px;
+        }
+
+        /* ----------------------------------- */
+        /* HAFIZA OYUNU STİLLERİ (MEMORY GAME) */
+        /* ----------------------------------- */
+        #memory-game-container {
+            text-align: center;
+        }
+        
+        #memory-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 10px;
+            max-width: 450px;
+            margin: 20px auto;
+        }
+        
+        .memory-card {
+            width: 100%;
+            padding-top: 100%; /* Kare görünüm için */
+            background-color: var(--game-card-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.5s;
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .memory-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            border-radius: 8px;
+        }
+        
+        .card-back {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .card-front {
+            background-color: white;
+            color: var(--dark-bg);
+            transform: rotateY(180deg);
+        }
+        
+        .memory-card.matched {
+            pointer-events: none;
+            opacity: 0.7;
+            box-shadow: 0 0 15px var(--secondary-color);
+        }
+        
+        #match-message {
+            font-size: 1.2em;
+            margin-top: 20px;
+            min-height: 20px;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer .social-links a {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        footer .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* ----------------------------------- */
+        /* RESPONSIVE AYARLAR */
+        /* ----------------------------------- */
+        @media(min-width: 992px) {
+             .game-wrapper {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media(max-width: 768px) {
+            /* Header Mobil Ayarları (Önceki sayfalardan alınmıştır) */
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            header h1 {
+                font-size: 1.5em;
+                float: none;
+                margin: 0;
+                padding: 5px 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            header nav {
+                float: none;
+                width: 100%;
+                max-height: 0; 
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out; 
+            }
+            header nav.active {
+                max-height: 300px; 
+                padding-bottom: 10px;
+            }
+            header ul {
+                display: block;
+                float: none;
+                margin-top: 10px;
+                text-align: left;
+            }
+            header li {
+                display: block;
+                padding: 10px 0; 
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .btn {
+                width: 90%;
+                display: block;
+                text-align: center;
+            }
+            
+            /* Oyun Alanı Mobil Ayarları */
+            .game-card {
+                padding: 20px;
+            }
+            #memory-board {
+                grid-template-columns: repeat(3, 1fr); /* Küçük ekranda 3x4 yapalım */
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div id="branding">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>FITLIFE</h1>
+                </a>
+            </div>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Menü Aç/Kapa">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html#programlar">Antrenman Programları</a></li>
+                    <li><a href="beslenme.html">Beslenme</a></li>
+                    <li><a href="sss.html">SSS</a></li>
+                    <li><a href="iletisim.html" class="btn btn-primary">Hemen Başla</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="games-section" class="section-padding">
+        <div class="container">
+            <h2><i class="fas fa-gamepad"></i> Fitness Challenge Merkezi</h2>
+            <p style="font-size: 1.2em; margin-bottom: 40px;">Zihinsel ve fiziksel becerilerinizi test edin! Ne kadar iyi odaklanabiliyor ve hedefinizi tutturabiliyorsunuz?</p>
+
+            <div class="game-wrapper">
+                
+                <div class="game-card">
+                    <h3>1. Günlük Fitness Tahmin Oyunu</h3>
+                    <div id="guess-game-container" style="text-align: center;">
+                        <label for="guess-input" style="display: block; font-size: 1.1em; margin-bottom: 10px;">Bugünkü adım hedefi (Örn: 10000):</label>
+                        <input type="number" id="guess-input" placeholder="Sayıyı girin..." min="1" required>
+                        <button id="submit-guess" class="btn btn-primary" style="width: 90%;">Tahmin Et!</button>
+                        <p id="guess-game-result" style="margin-top: 20px; font-weight: bold; font-size: 1.1em; min-height: 25px;"></p>
+                    </div>
+                </div>
+
+                <div class="game-card">
+                    <h3>2. Fitness Hafıza Oyunu (Eşleştir)</h3>
+                    <p style="text-align: center;">Kartları aç ve aynı fitness ekipmanlarını eşleştir. Süre: <span id="time">0</span> saniye.</p>
+                    
+                    <div id="memory-game-container">
+                        <div id="memory-board">
+                            </div>
+                        <p id="match-message" style="color: var(--secondary-color);">Başlamak için kartları çevir!</p>
+                        <button id="restart-game" class="btn btn-primary" style="background: var(--dark-bg);">Oyunu Yeniden Başlat</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year">2025</span> FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dinamik Yıl Güncellemesi
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Akıllı Header JavaScript Kodu
+        let lastScrollY = 0;
+        const header = document.querySelector('header');
+        let headerHeight = 0;
+        if(header) {
+             headerHeight = header.offsetHeight;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!header) return;
+
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
+                header.classList.add('header-hidden');
+            } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+
+        // MOBİL HAMBURGER MENÜ TOGGLE
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        });
+
+        // ===================================
+        // 1. TAHMİN OYUNU İŞLEVİ
+        // ===================================
+        const guessInput = document.getElementById('guess-input');
+        const submitGuessButton = document.getElementById('submit-guess');
+        const guessResultText = document.getElementById('guess-game-result');
+        const rootStyles = getComputedStyle(document.documentElement);
+        
+        const secondaryColor = rootStyles.getPropertyValue('--secondary-color').trim();
+        const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
+        const errorColor = '#dc3545'; // Kırmızı
+
+        const targetValue = 9000; // Yeni hedef değeri
+
+        submitGuessButton.addEventListener('click', () => {
+            const userGuess = parseInt(guessInput.value);
+            guessResultText.style.color = 'inherit'; 
+
+            if (isNaN(userGuess) || userGuess <= 0) {
+                guessResultText.textContent = "Lütfen geçerli bir adım sayısı girin (Örn: 8000).";
+                guessResultText.style.color = errorColor;
+                return;
+            }
+
+            const difference = Math.abs(userGuess - targetValue);
+
+            if (userGuess === targetValue) {
+                guessResultText.textContent = "🎯 MÜKEMMEL ATIŞ! Bugün tam hedefini yakaladın!";
+                guessResultText.style.color = secondaryColor;
+            } else if (difference <= 1000) {
+                guessResultText.textContent = `🔥 Harika! Sadece ${difference} adım farkla kaçırdın. Müthiş bir performans!`;
+                guessResultText.style.color = '#ffc107'; // Sarı
+            } else if (userGuess > targetValue) {
+                guessResultText.textContent = `🚀 Hedefinin çok üstünde! Bu motivasyonu koru! (Tahminin: ${userGuess})`;
+                guessResultText.style.color = primaryColor;
+            } else {
+                guessResultText.textContent = `💪 Hedefin (${targetValue}) biraz uzağındasın (${userGuess} tahminin). Hadi biraz daha yürü!`;
+                guessResultText.style.color = errorColor; 
+            }
+        });
+
+        // ===================================
+        // 2. HAFIZA OYUNU İŞLEVİ
+        // ===================================
+        
+        const memoryBoard = document.getElementById('memory-board');
+        const restartButton = document.getElementById('restart-game');
+        const matchMessage = document.getElementById('match-message');
+        const timeDisplay = document.getElementById('time');
+        
+        // Kart ikonları
+        const icons = [
+            '<i class="fas fa-dumbbell"></i>', 
+            '<i class="fas fa-running"></i>', 
+            '<i class="fas fa-weight-hanging"></i>', 
+            '<i class="fas fa-bicycle"></i>',
+            '<i class="fas fa-heartbeat"></i>',
+            '<i class="fas fa-tint"></i>' // Su/Hidrasyon
+        ];
+        
+        let cardArray = [];
+        let cardsFlipped = [];
+        let matchedPairs = 0;
+        let lockBoard = false;
+        let startTime = 0;
+        let timerInterval;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function createBoard() {
+            // İkonları iki katına çıkar
+            cardArray = shuffle([...icons, ...icons]);
+            memoryBoard.innerHTML = '';
+            cardsFlipped = [];
+            matchedPairs = 0;
+            lockBoard = false;
+            matchMessage.textContent = 'Başlamak için kartları çevir!';
+            
+            // Zamanlayıcıyı sıfırla ve durdur
+            clearInterval(timerInterval);
+            startTime = 0;
+            timeDisplay.textContent = '0';
+
+            cardArray.forEach((icon, index) => {
+                const card = document.createElement('div');
+                card.classList.add('memory-card');
+                card.dataset.value = icon;
+                card.dataset.id = index;
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-face card-back">FIT</div>
+                        <div class="card-face card-front">${icon}</div>
+                    </div>
+                `;
+                card.addEventListener('click', flipCard);
+                memoryBoard.appendChild(card);
+            });
+        }
+        
+        function startTimer() {
+            if (!timerInterval) {
+                startTime = Date.now();
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+        }
+        
+        function updateTimer() {
+            const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+            timeDisplay.textContent = elapsedTime;
+        }
+
+        function flipCard() {
+            if (lockBoard) return;
+            if (this.classList.contains('flipped')) return;
+
+            startTimer();
+            
+            this.classList.add('flipped');
+            cardsFlipped.push(this);
+
+            if (cardsFlipped.length === 2) {
+                lockBoard = true;
+                checkForMatch();
+            }
+        }
+
+        function checkForMatch() {
+            const [card1, card2] = cardsFlipped;
+            const isMatch = card1.dataset.value === card2.dataset.value;
+
+            if (isMatch) {
+                // Eşleşme bulundu
+                matchedPairs++;
+                disableCards();
+                if (matchedPairs === icons.length) {
+                    // Oyun bitti
+                    clearInterval(timerInterval);
+                    const finalTime = timeDisplay.textContent;
+                    matchMessage.innerHTML = `🎉 **TEBRİKLER!** Tüm eşleştirmeleri ${finalTime} saniyede tamamladınız!`;
+                } else {
+                    matchMessage.textContent = '✅ Eşleşme Bulundu!';
+                }
+            } else {
+                // Eşleşme yok
+                matchMessage.textContent = '❌ Eşleşme Yok. Tekrar Dene!';
+                setTimeout(() => {
+                    unflipCards();
+                }, 1000);
+            }
+        }
+
+        function disableCards() {
+            cardsFlipped.forEach(card => {
+                card.removeEventListener('click', flipCard);
+                card.classList.add('matched');
+            });
+            resetBoard();
+        }
+
+        function unflipCards() {
+            cardsFlipped.forEach(card => {
+                card.classList.remove('flipped');
+            });
+            resetBoard();
+        }
+
+        function resetBoard() {
+            cardsFlipped = [];
+            lockBoard = false;
+        }
+        
+        restartButton.addEventListener('click', createBoard);
+
+        // Sayfa yüklendiğinde oyunu başlat
+        createBoard();
+    </script>
+</body>
+</html>
