@@ -197,11 +197,25 @@
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-top: 4px solid var(--secondary-color);
-            transition: transform 0.3s, box-shadow 0.3s; 
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.4s, margin 0.4s; /* Görünmezlik geçişi için opacity eklendi */
             height: 100%; 
-            opacity: 0; /* Başlangıçta gizli */
-            transform: translateY(20px); /* Hafifçe alttan gelme */
-            animation: fadeInSlideUp 0.8s ease-out forwards; /* Animasyon */
+            opacity: 0; 
+            transform: translateY(20px); 
+            animation: fadeInSlideUp 0.8s ease-out forwards; 
+            display: flex; /* Filtreleme için flexbox düzeni korunur */
+            flex-direction: column;
+        }
+        
+        /* Gizlenen kartların stili */
+        .program-card-item.hidden {
+            opacity: 0;
+            height: 0;
+            padding: 0 30px;
+            margin: 0;
+            border-top: none;
+            box-shadow: none;
+            transform: scale(0.8);
+            pointer-events: none; /* Tıklanabilirliği kaldır */
         }
 
         /* Her karta farklı gecikme */
@@ -211,7 +225,7 @@
 
         /* Üzerine Gelme Efekti */
         .program-card-item:hover {
-            transform: translateY(-8px) scale(1.02); /* Hafif yukarı ve büyütme */
+            transform: translateY(-8px) scale(1.02); 
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
             cursor: pointer;
         }
@@ -231,6 +245,35 @@
             color: var(--primary-color);
         }
         
+        /* YENİ FİLTRE BUTONLARI STİLİ */
+        #filter-buttons {
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            background-color: var(--dark-bg);
+            color: white;
+            border: 1px solid var(--dark-bg);
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+        
+        .filter-btn:hover {
+            background-color: #343a40;
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+
         /* BÜLTEN KAYDI (CTA) BÖLÜMÜ STİLLERİ */
         #newsletter {
             background: linear-gradient(135deg, var(--dark-bg) 0%, #343a40 100%); 
@@ -355,13 +398,13 @@
             header nav {
                 float: none;
                 width: 100%;
-                max-height: 0; /* Başlangıçta gizli */
+                max-height: 0; 
                 overflow: hidden;
                 transition: max-height 0.3s ease-in-out; 
             }
             
             header nav.active {
-                max-height: 300px; /* Açıkken yüksekliği ayarla */
+                max-height: 300px; 
                 padding-bottom: 10px;
             }
 
@@ -409,6 +452,11 @@
                  width: 100%;
                  margin-bottom: 10px;
             }
+            
+            .filter-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
@@ -451,21 +499,29 @@
     <section id="programlar" class="section-padding">
         <div class="container">
             <h2>Size Özel Program Seçenekleri</h2>
+            
+            <div id="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Tüm Programlar</button>
+                <button class="filter-btn" data-filter="guc">Güç & Kütle</button>
+                <button class="filter-btn" data-filter="yag">Yağ Yakımı & Kondisyon</button>
+                <button class="filter-btn" data-filter="esneklik">Esneklik & Mobilite</button>
+                <button class="filter-btn" data-filter="baslangic">Başlangıç Seviye</button>
+            </div>
             <div class="program-grid">
                 
-                <div class="program-card-item">
+                <div class="program-card-item" data-goal="guc" data-level="orta seviye">
                     <i class="fas fa-dumbbell"></i>
                     <h3><a href="5x5-program.html">Güç ve Kas İnşası</a></h3>
                     <p>Maksimum kas kütlesi ve kuvvet artışı için bilimsel temelli **5x5 Sistemini** içerir.</p>
                 </div>
                 
-                <div class="program-card-item">
+                <div class="program-card-item" data-goal="yag" data-level="baslangic">
                     <i class="fas fa-running"></i>
                     <h3><a href="kardiyo-program.html">Yağ Yakımı ve Kondisyon</a></h3>
                     <p>Yağ yakımınızı hızlandıran ve kondisyon seviyenizi zirveye taşıyan dinamik egzersizler.</p>
                 </div>
                 
-                <div class="program-card-item">
+                <div class="program-card-item" data-goal="esneklik" data-level="baslangic">
                     <i class="fas fa-leaf"></i>
                     <h3><a href="esneklik-program.html">Esneklik ve Mobilite</a></h3>
                     <p>Vücut esnekliğini artıran, stresi azaltan ve sakatlanma riskini düşüren dersler.</p>
@@ -553,8 +609,47 @@
 
             setTimeout(() => {
                 // KENDİ GITHUB SAYFANIZIN YOLUNU KULLANIN
-                window.location.href = 'https://evmkir.github.io/fitlife-proje/tesekkurler.html'; 
+                window.location.href = 'tesekkurler.html'; 
             }, 1000); 
+        });
+
+        // ===================================
+        // YENİ DİNAMİK FİLTRELEME İŞLEVİ
+        // ===================================
+        
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const programCards = document.querySelectorAll('.program-card-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Aktif butonu güncelle
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                programCards.forEach(card => {
+                    const cardGoal = card.getAttribute('data-goal');
+                    const cardLevel = card.getAttribute('data-level');
+
+                    // Tüm programları göster
+                    if (filterValue === 'all') {
+                        card.classList.remove('hidden');
+                    } 
+                    // Hedef filtreleme
+                    else if (filterValue === cardGoal) {
+                        card.classList.remove('hidden');
+                    }
+                    // Seviye filtreleme (Şu an sadece başlangıç seviyesi mevcut)
+                    else if (filterValue === cardLevel) {
+                         card.classList.remove('hidden');
+                    }
+                    // Eşleşmeyenleri gizle
+                    else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
         });
     </script>
 
