@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim & Hemen Başla | FitLife</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ----------------------------------- */
+        /* GENEL AYARLAR VE RENKLER (Tüm sayfalarda aynı olmalı) */
+        /* ----------------------------------- */
+        :root {
+            --primary-color: #007bff; /* Fitness Mavisi (Canlı) */
+            --secondary-color: #28a745; /* Yeşil (Vurgu/Sağlık) */
+            --dark-bg: #212529; /* Koyu Zemin (Başlık/Alt Bilgi) */
+            --light-bg: #f8f9fa; /* Açık Zemin */
+            --accent-color: #ffc107; /* Sarı/Turuncu (CTA) */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+        }
+        
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        /* ----------------------------------- */
+        /* BAŞLIK VE NAVİGASYON */
+        /* ----------------------------------- */
+        header {
+            background: var(--dark-bg);
+            color: white;
+            padding: 15px 0;
+            border-bottom: var(--primary-color) 4px solid;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        header a:hover {
+            color: var(--accent-color);
+        }
+        
+        header h1 a {
+            font-size: 1.8em;
+        }
+
+        header ul {
+            padding: 0;
+            list-style: none;
+            float: right;
+            margin-top: 5px;
+        }
+
+        header li {
+            display: inline-block;
+            padding: 0 10px;
+        }
+
+        /* ----------------------------------- */
+        /* İLETİŞİM FORMU STİLLERİ */
+        /* ----------------------------------- */
+        #contact {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        #contact h2 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        #contact label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        #contact input[type="text"],
+        #contact input[type="email"],
+        #contact textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Padding'in genişliğe dahil olmasını sağlar */
+            font-family: var(--font-family);
+        }
+
+        #contact textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #1e7e34;
+        }
+
+        /* ----------------------------------- */
+        /* FOOTER */
+        /* ----------------------------------- */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.8em;
+            margin: 0 10px;
+        }
+        
+        /* ----------------------------------- */
+        /* MOBİL UYUM */
+        /* ----------------------------------- */
+        @media(max-width: 768px) {
+            header li { display: block; padding: 5px 0; }
+            header nav { float: none; text-align: center; width: 100%; }
+            header #branding { float: none; text-align: center; }
+            #contact { margin: 15px auto; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><a href="index.html">FitLife</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html#programlar">Antrenman Programları</a></li>
+                    <li><a href="beslenme.html">Beslenme</a></li>
+                    <li><a href="index.html#egitmenler">Eğitmenler</a></li>
+                    <li><a href="iletisim.html" class="btn btn-primary">Hemen Başla</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container">
+            <div id="contact">
+                <h2>Bize Ulaşın ve Hemen Başlayın!</h2>
+                <p style="text-align: center; margin-bottom: 25px;">Tüm sorularınız için formu doldurun veya size özel bir program talebinde bulunun. En kısa sürede dönüş yapacağız!</p>
+                
+                <form action="https://formspree.io/f/mqaybqwn" method="POST">
+                    
+                    <label for="name">Adınız Soyadınız *</label>
+                    <input type="text" id="name" name="Ad Soyad" required>
+                    
+                    <label for="email">E-posta Adresiniz *</label>
+                    <input type="email" id="email" name="Email" required>
+                    
+                    <label for="goal">Hedefiniz Nedir?</label>
+                    <input type="text" id="goal" name="Hedef" placeholder="Örn: Kilo vermek, kas yapmak, esnekliği artırmak">
+                    
+                    <label for="message">Mesajınız</label>
+                    <textarea id="message" name="Mesaj"></textarea>
+                    
+                    <button type="submit" class="btn-submit">Mesajı Gönder</button>
+                    
+                    <input type="text" name="_gotcha" style="display:none" />
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
