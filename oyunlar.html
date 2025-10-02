@@ -175,7 +175,7 @@
         }
 
         /* ----------------------------------- */
-        /* HAFIZA OYUNU STİLLERİ (DÜZELTİLDİ) */
+        /* HAFIZA OYUNU STİLLERİ (İYİLEŞTİRİLDİ) */
         /* ----------------------------------- */
         #memory-game-container {
             text-align: center;
@@ -183,7 +183,7 @@
         
         #memory-board {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4x4 ızgara */
+            grid-template-columns: repeat(4, 1fr); 
             gap: 10px;
             max-width: 450px;
             margin: 20px auto;
@@ -191,7 +191,7 @@
         
         .memory-card {
             width: 100%;
-            height: 110px; /* Kart yüksekliği sabitlendi */
+            height: 110px; 
             background-color: var(--game-card-color);
             border-radius: 8px;
             cursor: pointer;
@@ -206,7 +206,8 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            transition: transform 0.8s;
+            /* ANİMASYON HIZLANDIRILDI */
+            transition: transform 0.3s; 
             transform-style: preserve-3d;
         }
 
@@ -219,7 +220,7 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            display: flex; /* İçeriği ortalamak için */
+            display: flex; 
             align-items: center; 
             justify-content: center;
             font-size: 2em;
@@ -487,7 +488,7 @@
         });
 
         // ===================================
-        // 2. HAFIZA OYUNU İŞLEVİ (DÜZELTİLDİ)
+        // 2. HAFIZA OYUNU İŞLEVİ (İYİLEŞTİRİLDİ)
         // ===================================
         
         const memoryBoard = document.getElementById('memory-board');
@@ -513,6 +514,9 @@
         let lockBoard = false;
         let startTime = 0;
         let timerInterval;
+        
+        // Geri dönüş süresi (0.5 saniye)
+        const unflipDelay = 500; 
 
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -600,7 +604,7 @@
                 matchMessage.textContent = '❌ Eşleşme Yok. Tekrar Dene!';
                 setTimeout(() => {
                     unflipCards();
-                }, 1000);
+                }, unflipDelay); // Geri dönüş süresi kısaltıldı
             }
         }
 
