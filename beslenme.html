@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beslenme Rehberi | FitLife</title>
+    <title>FitLife | Beslenme Tüyoları ve Tarifler</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* Lütfen buraya 1. adımdaki TÜM YENİ CSS kodunu kopyalayın */
         /* ----------------------------------- */
         /* GENEL AYARLAR VE RENKLER */
         /* ----------------------------------- */
         :root {
-            --primary-color: #007bff;
-            --secondary-color: #28a745;
-            --dark-bg: #212529;
-            --light-bg: #f8f9fa;
-            --accent-color: #ffc107;
+            --primary-color: #007bff; 
+            --secondary-color: #ffc107; /* Beslenme vurgusu için sarı/turuncu */
+            --dark-bg: #212529; 
+            --light-bg: #f8f9fa; 
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -29,7 +27,7 @@
             line-height: 1.6;
             color: #333;
         }
-        
+
         .container {
             width: 90%; 
             max-width: 1200px;
@@ -38,33 +36,41 @@
         }
         
         .section-padding {
-            padding: 60px 0;
+            padding: 60px 0; 
         }
 
+        /* ----------------------------------- */
+        /* BAŞLIK VE NAVİGASYON (KOMPAKT STICKY) */
+        /* ----------------------------------- */
         header {
             background: var(--dark-bg);
             color: white;
-            padding: 15px 0;
+            padding: 8px 0; 
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky; 
+            top: 0;           
+            z-index: 1000;    
+            transition: top 0.3s ease-in-out; 
+        }
+
+        .header-hidden {
+            top: -100px !important; 
         }
 
         header a {
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 1em;
+            font-size: 0.9em; 
             transition: color 0.3s;
         }
-
-        header a:hover {
-            color: var(--accent-color);
+        
+        header h1 {
+            font-size: 1.6em; 
+            float: left;
         }
         
-        header h1 a {
-            font-size: 1.8em;
-        }
-
         header ul {
             padding: 0;
             list-style: none;
@@ -74,62 +80,126 @@
 
         header li {
             display: inline-block;
-            padding: 0 10px;
+            padding: 0 10px; 
         }
         
-        /* Beslenme Sayfasına Özel CSS */
-        .macro-card {
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        
+        /* ----------------------------------- */
+        /* BESLENME VE FİLTRE STİLLERİ */
+        /* ----------------------------------- */
+        #nutrition-section {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            border-left: 5px solid;
-            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        #nutrition-section h2 {
+            color: var(--secondary-color); /* Sarı/Turuncu vurgu */
+            margin-bottom: 40px;
+            font-size: 2.5em;
         }
         
-        .macro-card:nth-child(1) { border-left-color: #e74c3c; } /* Protein */
-        .macro-card:nth-child(2) { border-left-color: #3498db; } /* Karbonhidrat */
-        .macro-card:nth-child(3) { border-left-color: #f1c40f; } /* Yağ */
-        
-        .macro-card:hover {
-            transform: translateY(-3px);
+        /* Filtre Butonları */
+        .filter-buttons {
+            margin-bottom: 40px;
         }
         
-        .macro-card i {
-            font-size: 2em;
-            margin-right: 15px;
-            color: var(--secondary-color);
+        .filter-btn {
+            background-color: #e9ecef;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
         
-        .macro-grid {
+        .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        /* İçerik Kartları */
+        .content-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        /* Footer Kodu */
+        .content-card {
+            text-align: left;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: opacity 0.4s ease-in-out;
+            border-top: 4px solid var(--primary-color);
+            opacity: 1; /* Başlangıçta görünür */
+        }
+        
+        .content-card h3 {
+            color: var(--dark-bg);
+            margin-top: 0;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 10px;
+        }
+        
+        /* Filtrelenmiş kartlar gizlenir */
+        .content-card.hidden {
+            display: none;
+            opacity: 0;
+        }
+        
+        /* ----------------------------------- */
+        /* FOOTER */
+        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
             padding: 30px 0;
             text-align: center;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.8em;
-            margin: 0 10px;
+            margin-top: 40px;
         }
 
-        /* Mobil Uyum Kodları */
-        @media(max-width: 768px) {
-            header li { display: block; padding: 5px 0; }
-            header nav { float: none; text-align: center; width: 100%; }
-            header #branding { float: none; text-align: center; }
-            .macro-grid { grid-template-columns: 1fr; }
+        footer .social-links a {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s;
         }
         
+        footer .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Responsive Ayarlar */
+        @media(max-width: 768px) {
+            header li { display: block; padding: 5px 0; }
+            header nav { float: none; text-align: center; }
+            header h1 { float: none; text-align: center; }
+            .content-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -137,55 +207,74 @@
     <header>
         <div class="container">
             <div id="branding">
-                <h1><a href="index.html">FitLife</a></h1>
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>FITLIFE</h1>
+                </a>
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
-                    <li><a href="index.html#egitmenler">Eğitmenler</a></li>
+                    <li><a href="sss.html">SSS</a></li>
                     <li><a href="iletisim.html" class="btn btn-primary">Hemen Başla</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section id="program-detail" class="section-padding">
+    <section id="nutrition-section" class="section-padding">
         <div class="container">
-            <h2><i class="fas fa-carrot"></i> Sağlıklı Yaşamın Anahtarı: Makro Besin Rehberi</h2>
-            <p>Antrenman ne kadar sert olursa olsun, doğru beslenme olmadan gelişim sınırlı kalır. Vücudunuzun ihtiyacı olan üç temel makro besini (Protein, Karbonhidrat, Yağ) ve önemini keşfedin.</p>
+            <h2><i class="fas fa-apple-alt"></i> Fitness Başarısı İçin Beslenme Tüyoları</h2>
             
-            <hr style="margin: 30px 0;">
-            
-            <div class="macro-grid">
-                <div class="macro-card">
-                    <h3><i class="fas fa-drumstick-bite"></i> Protein (Kas Yapıcı)</h3>
-                    <p>Kas onarımı ve büyümesi için hayati öneme sahiptir. Bağışıklık sistemini destekler ve tokluk hissini artırır.</p>
-                    <strong>Kaynaklar:</strong> Yumurta, tavuk, balık, kırmızı et, baklagiller, peynir, yoğurt.
+            <p>Antrenmanınızın sonuçlarını maksimize etmek için doğru yakıt şarttır. Aşağıdaki filtreleri kullanarak hedefinize en uygun bilgilere ulaşın.</p>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Tüm Tüyolar</button>
+                <button class="filter-btn" data-filter="yag-yakimi">Yağ Yakımı Tüyoları</button>
+                <button class="filter-btn" data-filter="kas-gelisimi">Kas Gelişimi Tüyoları</button>
+                <button class="filter-btn" data-filter="tarifler">Hızlı Tarifler</button>
+            </div>
+
+            <div class="content-grid" id="content-grid">
+                
+                <div class="content-card yag-yakimi">
+                    <h3><i class="fas fa-burn"></i> Aralıklı Oruç (Intermittent Fasting)</h3>
+                    <p>Yağ yakımını hızlandırmak ve insülin duyarlılığını artırmak için popüler bir yöntem. Başlamadan önce mutlaka bir uzmana danışın.</p>
                 </div>
                 
-                <div class="macro-card">
-                    <h3><i class="fas fa-bread-slice"></i> Karbonhidrat (Enerji Kaynağı)</h3>
-                    <p>Vücudumuzun ve beynimizin bir numaralı yakıtıdır. Antrenman sırasında yüksek performans sağlar.</p>
-                    <strong>Kaynaklar:</strong> Yulaf, tam buğday, sebzeler, meyveler, pirinç, patates, kinoa.
+                <div class="content-card kas-gelisimi">
+                    <h3><i class="fas fa-hand-holding-medical"></i> Yeterli Protein Alımı</h3>
+                    <p>Kas onarımı ve gelişimi için vücut ağırlığınızın kilogramı başına 1.6 - 2.2 gram protein alımını hedefleyin.</p>
+                </div>
+                
+                <div class="content-card tarifler">
+                    <h3><i class="fas fa-blender"></i> Hızlı Yulaf Ezmesi Tarifi</h3>
+                    <p>Sabahları hızlı ve besleyici bir başlangıç için: Yulaf, süt, biraz protein tozu ve meyve! 5 dakikada hazır.</p>
                 </div>
 
-                <div class="macro-card">
-                    <h3><i class="fas fa-oil-can"></i> Yağlar (Hormon ve Vitamin)</h3>
-                    <p>Hormon üretimi, organ koruması ve yağda çözünen vitaminlerin emilimi için gereklidir. Vücudun uzun süreli enerji kaynağıdır.</p>
-                    <strong>Kaynaklar:</strong> Avokado, zeytinyağı, kuruyemişler, tohumlar, somon, doğal tereyağı.
+                <div class="content-card yag-yakimi">
+                    <h3><i class="fas fa-tint"></i> Su Tüketimi Önemi</h3>
+                    <p>Metabolizmanın hızlanması ve tokluk hissi için günde en az 3-4 litre su içmeye özen gösterin.</p>
                 </div>
+                
+                <div class="content-card kas-gelisimi">
+                    <h3><i class="fas fa-bolt"></i> Antrenman Öncesi Karbonhidrat</h3>
+                    <p>Antrenman öncesi 1-2 saat önce kompleks karbonhidrat tüketmek, enerji seviyenizi yüksek tutar.</p>
+                </div>
+                
+                <div class="content-card tarifler">
+                    <h3><i class="fas fa-drumstick-bite"></i> 10 Dakikalık Tavuk ve Sebze</h3>
+                    <p>Hızlı akşam yemeği için: Önceden pişirilmiş tavuk ve dondurulmuş sebzeleri wok tavada soteleyin.</p>
+                </div>
+
             </div>
             
-            <h3 style="margin-top: 50px; color: var(--secondary-color);"><i class="fas fa-balance-scale"></i> Beslenme İpucu</h3>
-            <p style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; background: white;">Hedefiniz ne olursa olsun, her öğününüzde bir protein kaynağı bulundurmak, kas kütlenizi korumanıza ve tokluk seviyenizi yüksek tutmanıza yardımcı olur.</p>
         </div>
     </section>
 
-
     <footer>
         <div class="container">
-            <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
+            <p>&copy; <span id="current-year">2025</span> FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -194,5 +283,73 @@
         </div>
     </footer>
 
+    <script>
+        // Dinamik Yıl Güncellemesi
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Akıllı Header JavaScript Kodu
+        let lastScrollY = 0;
+        const header = document.querySelector('header');
+        let headerHeight = 0;
+        if(header) {
+             headerHeight = header.offsetHeight;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!header) return;
+
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
+                header.classList.add('header-hidden');
+            } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+
+        // ------------------------------------
+        // ETKİLEŞİMLİ İÇERİK FİLTRESİ
+        // ------------------------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const contentCards = document.querySelectorAll('.content-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    
+                    // Aktif butonu belirle
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+
+                    // İçerikleri filtrele
+                    contentCards.forEach(card => {
+                        // Tüm kartları varsayılan olarak gizle
+                        card.classList.add('hidden');
+                        card.style.display = 'none';
+
+                        // Eğer filtre 'all' ise veya kartın sınıfı filtreye uyuyorsa göster
+                        if (filter === 'all' || card.classList.contains(filter)) {
+                            // setTimeout kullanarak geçişi (transition) daha yumuşak yap
+                            setTimeout(() => {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.classList.remove('hidden');
+                                }, 10); // Display block sonrası opacity için kısa bekleme
+                            }, 50); // Genel geçiş gecikmesi
+                        }
+                    });
+                });
+            });
+            
+            // Sayfa yüklendiğinde varsayılan olarak "Tüm Tüyolar" gösterilir.
+            // Bu, 'all' filtresini tetikler.
+            document.querySelector('.filter-btn[data-filter="all"]').click();
+        });
+
+    </script>
 </body>
 </html>
