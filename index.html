@@ -41,56 +41,56 @@
         }
 
         /* ----------------------------------- */
-        /* BAŞLIK VE NAVİGASYON */
+        /* BAŞLIK VE NAVİGASYON (AKILLI STICKY) */
         /* ----------------------------------- */
-        /* ----------------------------------- */
-/* BAŞLIK VE NAVİGASYON (KOMPAKT) */
-/* ----------------------------------- */
-header {
-    background: var(--dark-bg);
-    color: white;
-    /* Dikey dolguyu azalttık: 15px yerine 10px */
-    padding: 10px 0; 
-    border-bottom: var(--primary-color) 4px solid;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    
-    /* SABİT BAŞLIK (STICKY HEADER) */
-    position: sticky; 
-    top: 0;           
-    z-index: 1000;    
-}
+        header {
+            background: var(--dark-bg);
+            color: white;
+            /* Dikey dolguyu azalttık: 10px */
+            padding: 10px 0; 
+            border-bottom: var(--primary-color) 4px solid;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            
+            /* SABİT BAŞLIK (STICKY HEADER) */
+            position: sticky; 
+            top: 0;           
+            z-index: 1000;    
+            /* Yeni kod: Akıcı hareket için geçiş süresi */
+            transition: top 0.3s ease-in-out; 
+        }
 
-header a {
-    color: white;
-    text-decoration: none;
-    text-transform: uppercase;
-    /* Yazı boyutunu hafifçe küçülttük */
-    font-size: 0.95em; 
-    transition: color 0.3s;
-}
+        /* Yeni kod: Header'ı ekranın üstüne taşıyacak sınıf */
+        .header-hidden {
+            top: -100px !important; /* Header yüksekliğinden büyük olmalı */
+        }
 
-header a:hover {
-    color: var(--accent-color);
-}
+        header a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.95em; /* Yazı boyutunu hafifçe küçülttük */
+            transition: color 0.3s;
+        }
 
-header h1 a {
-    /* Logo başlığını biraz küçülttük */
-    font-size: 1.6em; 
-}
+        header a:hover {
+            color: var(--accent-color);
+        }
+        
+        header h1 a {
+            font-size: 1.6em; /* Logo başlığını biraz küçülttük */
+        }
 
-header ul {
-    padding: 0;
-    list-style: none;
-    float: right;
-    /* Üst boşluğu kaldırdık */
-    margin-top: 0; 
-}
+        header ul {
+            padding: 0;
+            list-style: none;
+            float: right;
+            margin-top: 0; /* Üst boşluğu kaldırdık */
+        }
 
-header li {
-    display: inline-block;
-    /* Yatay dolguyu koruduk */
-    padding: 0 10px; 
-}
+        header li {
+            display: inline-block;
+            padding: 0 10px; 
+        }
 
         /* ----------------------------------- */
         /* BUTONLAR (CTA) */
@@ -397,6 +397,7 @@ header li {
     </footer>
 
     <script>
+        // Günün İpucu Fonksiyonu
         const fitnessTips = [
             "Bugün 10.000 adım atmayı hedefle. Küçük hedefler büyük başarıları getirir!",
             "Antrenmandan sonra karbonhidrat ve proteini birlikte tüketerek toparlanmayı hızlandır.",
@@ -421,6 +422,32 @@ header li {
 
         document.addEventListener('DOMContentLoaded', () => {
             updateDailyTip();
+        });
+        
+        // Akıllı Header JavaScript Kodu
+        let lastScrollY = 0;
+        const header = document.querySelector('header');
+        // Header yüksekliğini doğru hesaplayabilmek için DOM'un yüklenmesini bekleyelim
+        let headerHeight = 0;
+        if(header) {
+             headerHeight = header.offsetHeight;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!header) return;
+
+            const currentScrollY = window.scrollY;
+
+            // Aşağı kaydırılıyor VE header zaten başlangıç pozisyonundan ayrılmış
+            if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
+                header.classList.add('header-hidden');
+            } 
+            // Yukarı kaydırılıyor VEYA sayfanın en üstüne yaklaşıldı
+            else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollY = currentScrollY;
         });
     </script>
 
