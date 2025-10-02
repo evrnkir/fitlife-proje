@@ -175,7 +175,7 @@
         }
 
         /* ----------------------------------- */
-        /* HAFIZA OYUNU STİLLERİ (İYİLEŞTİRİLDİ) */
+        /* HAFIZA OYUNU STİLLERİ (3D DÖNÜŞ İYİLEŞTİRİLDİ) */
         /* ----------------------------------- */
         #memory-game-container {
             text-align: center;
@@ -187,18 +187,20 @@
             gap: 10px;
             max-width: 450px;
             margin: 20px auto;
+            /* 3D Görünüm İçin Perspektif */
+            perspective: 1000px; 
         }
         
         .memory-card {
             width: 100%;
             height: 110px; 
-            background-color: var(--game-card-color);
+            background-color: transparent; 
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.5s;
             position: relative;
-            transform-style: preserve-3d;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d; 
+            transition: transform 0.6s; 
+            box-shadow: none; 
         }
         
         .card-inner {
@@ -206,12 +208,17 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            /* ANİMASYON HIZLANDIRILDI */
-            transition: transform 0.3s; 
-            transform-style: preserve-3d;
+            
+            /* KARTIN KENDİ DÖNÜŞ HIZI (0.4s ayarlandı) */
+            transition: transform 0.4s ease-in-out; 
+            transform-style: preserve-3d; 
+            
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            border-radius: 8px;
         }
 
         .memory-card.flipped .card-inner {
+            /* Tam 180 derece dönme animasyonu */
             transform: rotateY(180deg);
         }
         
@@ -219,7 +226,10 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            backface-visibility: hidden;
+            
+            /* ÖNEMLİ: Kartın arka yüzünün önden görünmesini engeller */
+            backface-visibility: hidden; 
+            
             display: flex; 
             align-items: center; 
             justify-content: center;
@@ -238,13 +248,13 @@
         .card-front {
             background-color: white;
             color: var(--dark-bg);
-            transform: rotateY(180deg);
+            /* Ön yüzü başlangıçta 180 derece ters çevir */
+            transform: rotateY(180deg); 
         }
         
         .memory-card.matched {
             pointer-events: none;
             opacity: 0.7;
-            box-shadow: 0 0 15px var(--secondary-color);
         }
         
         #match-message {
@@ -284,7 +294,7 @@
         }
         
         @media(max-width: 768px) {
-            /* Header Mobil Ayarları */
+            /* Header Mobil Ayarları (Kısaltıldı) */
             header .container {
                 display: flex;
                 justify-content: space-between;
@@ -332,11 +342,11 @@
                 padding: 20px;
             }
             #memory-board {
-                grid-template-columns: repeat(4, 1fr); /* Mobil cihazda 4x4 */
+                grid-template-columns: repeat(4, 1fr); 
                 max-width: 400px;
             }
             .memory-card {
-                height: 80px; /* Mobil için kartı küçült */
+                height: 80px; 
             }
             .card-face {
                 font-size: 1.5em;
@@ -604,7 +614,7 @@
                 matchMessage.textContent = '❌ Eşleşme Yok. Tekrar Dene!';
                 setTimeout(() => {
                     unflipCards();
-                }, unflipDelay); // Geri dönüş süresi kısaltıldı
+                }, unflipDelay); 
             }
         }
 
