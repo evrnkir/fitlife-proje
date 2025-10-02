@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesyonel Fitness Rehberiniz | FitLife</title>
+    <title>FitLife | En İyi Antrenman ve Beslenme Programları</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -12,11 +12,11 @@
         /* GENEL AYARLAR VE RENKLER */
         /* ----------------------------------- */
         :root {
-            --primary-color: #007bff; /* Fitness Mavisi (Canlı) */
-            --secondary-color: #28a745; /* Yeşil (Vurgu/Sağlık) */
-            --dark-bg: #212529; /* Koyu Zemin (Başlık/Alt Bilgi) */
-            --light-bg: #f8f9fa; /* Açık Zemin */
-            --accent-color: #ffc107; /* Sarı/Turuncu (CTA) */
+            --primary-color: #007bff; /* Mavi - Vurgu ve Buton */
+            --secondary-color: #28a745; /* Yeşil - Program Kartları */
+            --dark-bg: #212529; /* Koyu Arka Plan */
+            --light-bg: #f8f9fa; /* Açık Arka Plan */
+            --accent-color: #ffc107; /* Sarı/Turuncu - Bülten Vurgu */
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -46,45 +46,37 @@
         header {
             background: var(--dark-bg);
             color: white;
-            /* Dikey dolguyu azalttık: 10px */
             padding: 10px 0; 
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            
-            /* SABİT BAŞLIK (STICKY HEADER) */
             position: sticky; 
             top: 0;           
             z-index: 1000;    
-            /* Yeni kod: Akıcı hareket için geçiş süresi */
             transition: top 0.3s ease-in-out; 
         }
 
-        /* Yeni kod: Header'ı ekranın üstüne taşıyacak sınıf */
         .header-hidden {
-            top: -100px !important; /* Header yüksekliğinden büyük olmalı */
+            top: -100px !important; 
         }
 
         header a {
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.95em; /* Yazı boyutunu hafifçe küçülttük */
+            font-size: 0.95em; 
             transition: color 0.3s;
         }
-
-        header a:hover {
-            color: var(--accent-color);
-        }
         
-        header h1 a {
-            font-size: 1.6em; /* Logo başlığını biraz küçülttük */
+        header h1 {
+            font-size: 1.6em; 
+            float: left;
         }
 
         header ul {
             padding: 0;
             list-style: none;
             float: right;
-            margin-top: 0; /* Üst boşluğu kaldırdık */
+            margin-top: 5px;
         }
 
         header li {
@@ -93,151 +85,181 @@
         }
 
         /* ----------------------------------- */
-        /* BUTONLAR (CTA) */
-        /* ----------------------------------- */
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            border: none;
-            cursor: pointer;
-            border-radius: 50px; 
-            font-weight: bold;
-            text-transform: uppercase;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #0056b3;
-            transform: translateY(-2px);
-        }
-        .btn-secondary:hover {
-            background: #1e7e34;
-            transform: translateY(-2px);
-        }
-
-
-        /* ----------------------------------- */
-        /* HERO ALANI */
+        /* KAHRAMAN (HERO) ALANI STİLİ */
         /* ----------------------------------- */
         #hero {
-            min-height: 450px;
-            background: url('https://picsum.photos/1200/450?random=1') no-repeat center center/cover;
-            text-align: center;
+            background: url('https://picsum.photos/1200/600?random=gym') no-repeat center center/cover;
             color: white;
+            min-height: 450px; 
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5); 
+            text-align: center;
+            position: relative;
+        }
+
+        /* Arka plan karartma katmanı */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.55); 
+        }
+
+        #hero-content {
+            position: relative;
+            z-index: 10;
         }
 
         #hero h2 {
-            font-size: 4.5em;
+            font-size: 3.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        #hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* ----------------------------------- */
+        /* PROGRAM KARTLARI STİLİ */
+        /* ----------------------------------- */
+        #programlar {
+            background: white;
+            text-align: center;
         }
         
-        #hero p {
-            font-size: 1.4em;
+        #programlar h2 {
+            color: var(--dark-bg);
+            margin-bottom: 40px;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card-item {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--secondary-color);
+            transition: transform 0.3s;
+            height: 100%; /* Kartların eşit boyda olmasını sağlar */
+        }
+
+        .program-card-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .program-card-item i {
+            font-size: 3em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .program-card-item h3 a {
+            text-decoration: none;
+            color: var(--dark-bg);
+            transition: color 0.3s;
+        }
+        .program-card-item h3 a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* ----------------------------------- */
+        /* BÜLTEN KAYDI (CTA) BÖLÜMÜ STİLLERİ */
+        /* ----------------------------------- */
+        #newsletter {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #343a40 100%); /* Koyu degrade arka plan */
+            color: white;
+            text-align: center;
+            padding: 70px 20px;
+            margin-top: 50px;
+        }
+
+        #newsletter h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--accent-color); /* Sarı/Turuncu Vurgu */
+            font-weight: 700;
+        }
+
+        #newsletter p {
+            font-size: 1.2em;
             margin-bottom: 30px;
         }
 
-        /* ----------------------------------- */
-        /* GÜNÜN İPUCU (CARD) */
-        /* ----------------------------------- */
-        #tip-of-day {
+        #newsletter .input-group {
+            display: flex;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #newsletter input[type="email"] {
+            padding: 15px 20px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            flex-grow: 1;
+        }
+
+        #newsletter button.btn-primary {
             background: var(--primary-color);
             color: white;
-            padding: 30px 0;
-            text-align: center;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+            transition: background 0.3s;
+        }
+
+        #newsletter button.btn-primary:hover {
+            background: #0056b3; 
         }
         
-        .tip-card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* ----------------------------------- */
-        /* PROGRAM KARTLARI (ANA SAYFA) */
-        /* ----------------------------------- */
-        #programlar {
-            text-align: center;
+        #newsletter i {
+            margin-right: 10px;
         }
         
-        .program-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .program-card a {
-            text-decoration: none;
-            color: #333;
-            display: block;
-            transition: color 0.3s;
+        #success-message {
+            color: var(--secondary-color);
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
         }
         
-        .program-card a:hover {
-            color: var(--primary-color);
-        }
-
-        .program-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            border-top: 5px solid var(--secondary-color);
-        }
-
-        .program-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .program-card i {
-            font-size: 3.5em;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .program-card h4 {
-            color: var(--dark-bg);
-            font-size: 1.5em;
-        }
-
-        /* ----------------------------------- */
-        /* DETAY SAYFASI ORTAK STİLLERİ (Sadece uyum için) */
-        /* ----------------------------------- */
-        #program-detail {
-            padding: 50px 0;
-        }
-        
-        .exercise-list li img {
-            width: 60px;
-            height: 60px;
-            margin-right: 20px;
-            border-radius: 8px;
-            object-fit: cover;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border: 2px solid white;
-        }
-
         /* ----------------------------------- */
         /* FOOTER */
         /* ----------------------------------- */
@@ -246,62 +268,31 @@
             color: white;
             padding: 30px 0;
             text-align: center;
-            margin-top: 0;
         }
 
-        .social-links a {
+        footer .social-links a {
             color: white;
-            font-size: 1.8em;
+            font-size: 1.5em;
             margin: 0 10px;
             transition: color 0.3s;
         }
         
-        .social-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* ----------------------------------- */
-        /* MOBİL UYUM (RESPONSIVE DESIGN) */
-        /* ----------------------------------- */
-        @media(max-width: 992px) {
-            .container {
-                width: 95%;
-            }
-            header nav ul {
-                text-align: center;
-                float: none;
-                margin-top: 10px;
-            }
-            header li {
-                padding: 0 8px;
-            }
+        footer .social-links a:hover {
+            color: var(--primary-color);
         }
         
+        /* Responsive Ayarlar */
         @media(max-width: 768px) {
-            header #branding,
-            header nav {
-                float: none;
-                text-align: center;
-                width: 100%;
-            }
-            header li {
-                display: block; 
-                padding: 5px 0;
-            }
-            header nav ul {
-                display: block;
-            }
-
-            #hero h2 {
-                font-size: 3em;
-            }
-            
-            #hero p {
-                font-size: 1.1em;
-            }
-
-            .program-grid {
-                grid-template-columns: 1fr; 
+            header li { display: block; padding: 5px 0; }
+            header nav { float: none; text-align: center; }
+            header h1 { float: none; text-align: center; }
+            #hero h2 { font-size: 2.5em; }
+            .program-grid { grid-template-columns: 1fr; }
+            #newsletter .input-group { flex-direction: column; }
+            #newsletter input[type="email"], #newsletter button.btn-primary {
+                 border-radius: 5px; 
+                 width: 100%;
+                 margin-bottom: 10px;
             }
         }
     </style>
@@ -311,11 +302,13 @@
     <header>
         <div class="container">
             <div id="branding">
-                <h1><a href="index.html">FitLife</a></h1>
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>FITLIFE</h1>
+                </a>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html#programlar">Antrenman Programları</a></li>
+                    <li><a href="#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
                     <li><a href="sss.html">SSS</a></li>
                     <li><a href="iletisim.html" class="btn btn-primary">Hemen Başla</a></li>
@@ -325,56 +318,40 @@
     </header>
 
     <section id="hero">
-        <div class="hero-content">
-            <h2>Hayatınızı Yeniden Şekillendirin.</h2>
-            <p>Profesyonel rehberlik, kişiye özel planlar ve kalıcı sonuçlar.</p>
-            <a href="iletisim.html" class="btn btn-primary">Hemen Başla</a>
-        </div>
-    </section>
-
-    <section id="tip-of-day">
-        <div class="container">
-            <div class="tip-card">
-                <h3><i class="fas fa-lightbulb"></i> Günün Fitness İpucu:</h3>
-                <p id="daily-tip">Yapay zeka tarafından güncellenecek motivasyon ve ipucu metni burada görünecek.</p>
-                <button onclick="updateDailyTip()" class="btn btn-secondary">Başka Bir İpucu Gelsin!</button>
-            </div>
+        <div id="hero-content">
+            <h2>Fitness Yolculuğunuz Başlasın</h2>
+            <p>Kişiselleştirilmiş programlar, bilimsel tüyolar ve sürekli motivasyon.</p>
+            <a href="#programlar" class="btn btn-primary">Programları Keşfet</a>
         </div>
     </section>
 
     <section id="programlar" class="section-padding">
         <div class="container">
-            <h2>Size Özel Antrenmanlar</h2>
+            <h2>Size Özel Program Seçenekleri</h2>
             <div class="program-grid">
                 
-                <div class="program-card">
-                    <a href="5x5-program.html"> 
-                        <i class="fas fa-dumbbell"></i>
-                        <h4>Güç Odaklı Program (5x5)</h4>
-                        <p>Maksimum kas kütlesi ve kuvvet artışı için bilimsel temelli **5x5 Sistemi**.</p>
-                    </a>
-                </div>
-
-                <div class="program-card">
-                    <a href="kardiyo-program.html">
-                        <i class="fas fa-running"></i>
-                        <h4>Kardiyo & Dayanıklılık</h4>
-                        <p>Yağ yakımını hızlandıran ve kondisyon seviyenizi zirveye taşıyan dinamik egzersizler.</p>
-                    </a>
+                <div class="program-card-item">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3><a href="5x5-program.html">Güç ve Kas İnşası</a></h3>
+                    <p>Maksimum kas kütlesi ve kuvvet artışı için bilimsel temelli **5x5 Sistemini** içerir.</p>
                 </div>
                 
-                <div class="program-card">
-                    <a href="esneklik-program.html">
-                        <i class="fas fa-leaf"></i>
-                        <h4>Esneklik & Yoga</h4>
-                        <p>Vücut esnekliğini artıran, stresi azaltan ve sakatlanma riskini düşüren dersler.</p>
-                    </a>
+                <div class="program-card-item">
+                    <i class="fas fa-running"></i>
+                    <h3><a href="kardiyo-program.html">Yağ Yakımı ve Kondisyon</a></h3>
+                    <p>Yağ yakımınızı hızlandıran ve kondisyon seviyenizi zirveye taşıyan dinamik egzersizler.</p>
                 </div>
+                
+                <div class="program-card-item">
+                    <i class="fas fa-leaf"></i>
+                    <h3><a href="esneklik-program.html">Esneklik ve Mobilite</a></h3>
+                    <p>Vücut esnekliğini artıran, stresi azaltan ve sakatlanma riskini düşüren dersler.</p>
+                </div>
+
             </div>
         </div>
     </section>
 
-    ---
     <section id="newsletter">
         <div class="container">
             <h2><i class="fas fa-envelope-open-text"></i> FitLife Bültenine Kaydolun!</h2>
@@ -382,23 +359,25 @@
                 **Antrenman Sırları, Beslenme Tüyoları ve Motivasyon İpuçları** direkt **Gelen Kutunuzda** sizi bekliyor!
             </p>
             
-            <form action="https://formspree.io/f/mqaybqwn" method="POST">
+            <form id="newsletter-form" action="https://formspree.io/f/mqaybqwn" method="POST">
                 
-                <input type="hidden" name="_next" value="https://evmkir.github.io/fitlife-proje/tesekkurler.html" />
                 <input type="hidden" name="Konu" value="FitLife Bülten Kaydı"> 
                 
                 <div class="input-group">
                     <input type="email" name="_replyto" placeholder="E-posta adresiniz..." required>
                     <button type="submit" class="btn btn-primary">ŞİMDİ KAYDOL</button>
                 </div>
+                
+                <p id="success-message">
+                    Teşekkürler! Tüyolarınız yükleniyor...
+                </p>
             </form>
         </div>
     </section>
----
-    
+
     <footer>
         <div class="container">
-            <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır.</p>
+            <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -408,37 +387,9 @@
     </footer>
 
     <script>
-        // Günün İpucu Fonksiyonu
-        const fitnessTips = [
-            "Bugün 10.000 adım atmayı hedefle. Küçük hedefler büyük başarıları getirir!",
-            "Antrenmandan sonra karbonhidrat ve proteini birlikte tüketerek toparlanmayı hızlandır.",
-            "Su içmeyi unutma! Dehidrasyon, antrenman performansını %20'ye kadar düşürebilir.",
-            "Haftada en az 3 gün esneme hareketleri yaparak sakatlanma riskini en aza indir.",
-            "Uyku, kas gelişimi ve yağ yakımının en kritik parçasıdır. Kaliteli uykuya öncelik ver.",
-            "Yeni bir egzersiz denemekten çekinme. Vücudunu şaşırtmak, gelişim için şarttır.",
-        ];
-
-        function updateDailyTip() {
-            const tipElement = document.getElementById("daily-tip");
-            const randomIndex = Math.floor(Math.random() * fitnessTips.length);
-            const newTip = fitnessTips[randomIndex];
-
-            tipElement.style.opacity = 0;
-
-            setTimeout(() => {
-                tipElement.textContent = newTip;
-                tipElement.style.opacity = 1;
-            }, 300);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            updateDailyTip();
-        });
-        
         // Akıllı Header JavaScript Kodu
         let lastScrollY = 0;
         const header = document.querySelector('header');
-        // Header yüksekliğini doğru hesaplayabilmek için DOM'un yüklenmesini bekleyelim
         let headerHeight = 0;
         if(header) {
              headerHeight = header.offsetHeight;
@@ -449,7 +400,7 @@
 
             const currentScrollY = window.scrollY;
 
-            // Aşağı kaydırılıyor VE header zaten başlangıç pozisyonundan ayrılmış
+            // Aşağı kaydırılıyor VE header başlangıç pozisyonundan ayrılmış
             if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
                 header.classList.add('header-hidden');
             } 
@@ -459,6 +410,28 @@
             }
             
             lastScrollY = currentScrollY;
+        });
+
+        // Formspree (Ücretsiz Kısıtlama) için JavaScript Yönlendirmesi
+        const form = document.getElementById('newsletter-form');
+        const successMessage = document.getElementById('success-message');
+        
+        // Başlangıçta gizli tut
+        successMessage.style.display = 'none'; 
+
+        form.addEventListener('submit', function(event) {
+            
+            // Kullanıcıya bir mesaj göster
+            successMessage.style.display = 'block';
+
+            // Formun varsayılan gönderimini Formspree'ye bırakıyoruz.
+            // 1 saniye sonra teşekkürler sayfasına yönlendir.
+            // Bu, Formspree'nin gönderimi tamamladığını VEYA hata verdiğini varsayar,
+            // ancak ücretsiz hesapta en iyi kullanıcı deneyimi budur.
+            setTimeout(() => {
+                // KENDİ GITHUB SAYFANIZIN YOLUNU KULLANARAK YÖNLENDİRİYORUZ
+                window.location.href = 'https://evmkir.github.io/fitlife-proje/tesekkurler.html'; 
+            }, 1000); // 1000 milisaniye = 1 saniye
         });
     </script>
 
