@@ -374,16 +374,27 @@
         </div>
     </section>
 
-    <section id="newsletter" class="section-padding">
-        <div class="container text-center">
-            <h3>Ücretsiz Fitness Bültenimize Kaydolun!</h3>
-            <p>Antrenman sırları, beslenme tüyoları ve motivasyon direkt gelen kutunuzda.</p>
-            <form action="#" method="POST">
-                <input type="email" placeholder="E-posta adresiniz..." required>
-                <button type="submit" class="btn btn-primary">Şimdi Kaydol</button>
+    ---
+    <section id="newsletter">
+        <div class="container">
+            <h2><i class="fas fa-envelope-open-text"></i> FitLife Bültenine Kaydolun!</h2>
+            <p>
+                **Antrenman Sırları, Beslenme Tüyoları ve Motivasyon İpuçları** direkt **Gelen Kutunuzda** sizi bekliyor!
+            </p>
+            
+            <form action="https://formspree.io/f/mqaybqwn" method="POST">
+                
+                <input type="hidden" name="_next" value="https://evmkir.github.io/fitlife-proje/tesekkurler.html" />
+                <input type="hidden" name="Konu" value="FitLife Bülten Kaydı"> 
+                
+                <div class="input-group">
+                    <input type="email" name="_replyto" placeholder="E-posta adresiniz..." required>
+                    <button type="submit" class="btn btn-primary">ŞİMDİ KAYDOL</button>
+                </div>
             </form>
         </div>
     </section>
+---
     
     <footer>
         <div class="container">
