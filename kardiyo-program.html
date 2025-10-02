@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kardiyo & Dayanıklılık Programı Detayı | FitLife</title>
+    <title>Kardiyo Programı | FitLife</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* Lütfen buraya 1. adımdaki TÜM YENİ CSS kodunu kopyalayın */
         /* ----------------------------------- */
         /* GENEL AYARLAR VE RENKLER */
         /* ----------------------------------- */
         :root {
-            --primary-color: #007bff; /* Fitness Mavisi (Canlı) */
-            --secondary-color: #28a745; /* Yeşil (Vurgu/Sağlık) */
-            --dark-bg: #212529; /* Koyu Zemin (Başlık/Alt Bilgi) */
-            --light-bg: #f8f9fa; /* Açık Zemin */
-            --accent-color: #ffc107; /* Sarı/Turuncu (CTA) */
+            --primary-color: #007bff; /* Fitness Mavisi */
+            --secondary-color: #dc3545; /* Kırmızı (Kardiyo/Enerji) */
+            --dark-bg: #212529; 
+            --light-bg: #f8f9fa; 
+            --accent-color: #ffc107; 
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -31,142 +30,131 @@
         }
 
         .container {
-            width: 90%; /* Geniş ekranlarda daha fazla yer kaplasın */
+            width: 90%; 
             max-width: 1200px;
             margin: auto;
             overflow: hidden;
         }
         
         .section-padding {
-            padding: 60px 0; /* Daha ferah bir görüntü */
+            padding: 60px 0; 
         }
 
         /* ----------------------------------- */
-        /* BAŞLIK VE NAVİGASYON */
+        /* BAŞLIK VE NAVİGASYON (AKILLI STICKY) */
         /* ----------------------------------- */
         header {
             background: var(--dark-bg);
             color: white;
-            padding: 15px 0;
+            padding: 10px 0; 
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky; 
+            top: 0;           
+            z-index: 1000;    
+            transition: top 0.3s ease-in-out; 
+        }
+
+        .header-hidden {
+            top: -100px !important; 
         }
 
         header a {
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 1em;
+            font-size: 0.95em; 
             transition: color 0.3s;
-        }
-
-        header a:hover {
-            color: var(--accent-color);
         }
         
         header h1 a {
-            font-size: 1.8em;
+            font-size: 1.6em; 
         }
 
         header ul {
             padding: 0;
             list-style: none;
             float: right;
-            margin-top: 5px;
+            margin-top: 0;
         }
 
         header li {
             display: inline-block;
-            padding: 0 10px;
+            padding: 0 10px; 
         }
         
         /* ----------------------------------- */
-        /* BUTONLAR (CTA) */
-        /* ----------------------------------- */
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            border: none;
-            cursor: pointer;
-            border-radius: 50px; /* Daha modern yuvarlak butonlar */
-            font-weight: bold;
-            text-transform: uppercase;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: var(--secondary-color);
-            color: white;
-        }
-        
-        /* ----------------------------------- */
-        /* DETAY SAYFASI STİLLERİ */
+        /* KARDİYO İÇERİK STİLLERİ */
         /* ----------------------------------- */
         #program-detail {
             padding: 50px 0;
-        }
-
-        #program-detail h2 {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            font-size: 2.2em;
+            background-color: white;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         
-        .day-plan {
-            background: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-left: 6px solid var(--secondary-color);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        #program-detail h2 {
+            color: var(--secondary-color); /* Kırmızı vurgu */
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .day-plan h3 {
+        .cardio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .program-card {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid var(--secondary-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .program-card h3 {
             color: var(--dark-bg);
             margin-top: 0;
-            font-size: 1.5em;
+            border-bottom: 2px dashed var(--secondary-color);
+            padding-bottom: 10px;
         }
 
-        .exercise-list {
+        .image-container img {
+            width: 100%;
+            height: 200px; /* Sabit yükseklik */
+            border-radius: 5px;
+            object-fit: cover; /* Resmi sığdırır */
+            margin-bottom: 15px;
+        }
+
+        .details-list {
             list-style: none;
-            padding: 0;
+            padding-left: 0;
         }
-        
-        .exercise-list li {
-            background: #e9ecef; /* Daha belirgin arka plan */
+
+        .details-list li {
             margin-bottom: 10px;
-            padding: 12px;
-            border-radius: 8px;
+            padding-left: 15px;
+            position: relative;
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.3s;
         }
         
-        .exercise-list li:hover {
-            background-color: #dee2e6;
+        .details-list li i {
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            top: 2px;
         }
-
-        .exercise-list li img {
-            width: 60px; /* Görsel boyutu büyütüldü */
-            height: 60px;
-            margin-right: 20px;
-            border-radius: 8px;
-            object-fit: cover;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border: 2px solid white; /* Hafif çerçeve */
-        }
-
+        
         /* ----------------------------------- */
         /* FOOTER */
         /* ----------------------------------- */
@@ -177,22 +165,10 @@
             text-align: center;
             margin-top: 50px;
         }
-
-        .social-links a {
-            color: white;
-            font-size: 1.8em;
-            margin: 0 10px;
-        }
         
-        /* ----------------------------------- */
-        /* MOBİL UYUM */
-        /* ----------------------------------- */
         @media(max-width: 768px) {
-            header li { display: none; }
-            header nav { float: none; text-align: center; }
-            header #branding { float: none; text-align: center; }
-            .container { width: 95%; }
-            .exercise-list li img { width: 40px; height: 40px; }
+            header li { display: block; padding: 5px 0; }
+            .cardio-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -205,67 +181,120 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html">Ana Sayfa</a></li>
-                    <li><a href="index.html#iletisim">İletişim</a></li>
+                    <li><a href="index.html#programlar">Antrenman Programları</a></li>
+                    <li><a href="beslenme.html">Beslenme</a></li>
+                    <li><a href="sss.html">SSS</a></li>
+                    <li><a href="iletisim.html" class="btn btn-primary">Hemen Başla</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section id="program-detail">
+    <section id="program-detail" class="section-padding">
         <div class="container">
-            <h2>Kardiyo & Dayanıklılık Programı: 4 Haftada Zirve Kondisyon</h2>
-            <p>**HIIT ve Stabil Kardiyo Dengesi:** Bu program, Yüksek Yoğunluklu Aralıklı Antrenman (HIIT) ile uzun süreli stabil kardiyoyu birleştirerek maksimum yağ yakımı ve kardiyovasküler kapasite artışı hedefler. Haftada 4 gün antrenman önerilir.</p>
+            <p style="text-align: center; color: var(--primary-color); font-weight: bold; font-size: 1.1em;">
+                <a href="index.html#programlar" style="color: var(--primary-color); text-decoration: none;"><i class="fas fa-arrow-left"></i> Tüm Programlara Dön</a>
+            </p>
             
-            <hr>
-            
-            <div class="day-plan">
-                <h3><i class="fas fa-calendar-alt"></i> 1. Gün: Yüksek Yoğunluklu Koşu (HIIT)</h3>
-                <ul class="exercise-list">
-                    <li><img src="https://picsum.photos/id/24/60/60" alt="Koşu"><i class="fas fa-angle-right"></i> **Isınma:** 5 dakika hafif koşu.</li>
-                    <li><img src="https://picsum.photos/id/26/60/60" alt="Depar"><i class="fas fa-angle-right"></i> **HIIT Döngüsü:** 30 saniye depar (maksimum hız), 60 saniye yavaş tempo (aktif dinlenme). (8-10 tur)</li>
-                    <li><img src="https://picsum.photos/id/28/60/60" alt="Esneklik"><i class="fas fa-angle-right"></i> **Soğuma:** 5 dakika esneme.</li>
-                </ul>
+            <h2>Kardiyo Programları: Kalp ve Dayanıklılık</h2>
+            <p style="text-align: center; margin-bottom: 50px; font-size: 1.1em;">
+                İhtiyacınıza en uygun kardiyo yöntemini seçin. İster hızlı yağ yakımı, ister uzun süreli dayanıklılık!
+            </p>
+
+            <div class="cardio-grid">
+                
+                <div class="program-card">
+                    <h3><i class="fas fa-bolt" style="color: var(--secondary-color);"></i> Yüksek Yoğunluklu Aralık Antrenmanı (HIIT)</h3>
+                    
+                    <div class="image-container">
+                        <img src="https://picsum.photos/800/450?random=hiit" alt="HIIT Antrenmanı Görseli">
+                        <p style="font-size: 0.85em; text-align: center; margin-top: 5px; color: #666;">
+                            *Bu görseli kendi **HIIT** resminizle/GIF'inizle değiştirin.
+                        </p>
+                    </div>
+                    
+                    <p>
+                        Kısa sürede maksimum efor harcayarak metabolizmayı hızlandıran, en etkili yağ yakma yöntemidir.
+                    </p>
+
+                    <h4>Temel Detaylar:</h4>
+                    <ul class="details-list">
+                        <li><i class="fas fa-clock"></i> Süre: **15-25 dakika**</li>
+                        <li><i class="fas fa-fire"></i> Odak: Hızlı yağ yakımı, dayanıklılık artışı.</li>
+                        <li><i class="fas fa-redo-alt"></i> Örnek: 30 saniye depar + 60 saniye yürüme (8-10 tekrar).</li>
+                        <li><i class="fas fa-heartbeat"></i> Haftalık: 3-4 gün (Dinlenmeyi unutmayın).</li>
+                    </ul>
+                </div>
+                
+                <div class="program-card">
+                    <h3><i class="fas fa-running" style="color: var(--secondary-color);"></i> Düşük Yoğunluklu Sabit Durum (LISS)</h3>
+                    
+                    <div class="image-container">
+                        <img src="https://picsum.photos/800/450?random=liss" alt="LISS Antrenmanı Görseli">
+                        <p style="font-size: 0.85em; text-align: center; margin-top: 5px; color: #666;">
+                            *Bu görseli kendi **LISS** resminizle/GIF'inizle değiştirin.
+                        </p>
+                    </div>
+                    
+                    <p>
+                        Düşük ve sabit tempoda uzun süre yapılan bu kardiyo, kalbi yormadan yağ yakımını destekler.
+                    </p>
+
+                    <h4>Temel Detaylar:</h4>
+                    <ul class="details-list">
+                        <li><i class="fas fa-clock"></i> Süre: **45-60 dakika**</li>
+                        <li><i class="fas fa-burn"></i> Odak: Kalp sağlığı, genel dayanıklılık.</li>
+                        <li><i class="fas fa-walking"></i> Örnek: Yüksek tempoda yürüyüş, hafif koşu, bisiklet.</li>
+                        <li><i class="fas fa-calendar-alt"></i> Haftalık: 4-6 gün (İyileşmeyi destekler).</li>
+                    </ul>
+                </div>
+                
             </div>
             
-            <div class="day-plan">
-                <h3><i class="fas fa-calendar-alt"></i> 2. Gün: Vücut Ağırlığı Devre Antrenmanı</h3>
-                <ul class="exercise-list">
-                    <li><img src="https://picsum.photos/id/30/60/60" alt="Jumping Jacks"><i class="fas fa-angle-right"></i> **Jumping Jacks (Kelebek Zıplaması):** 45 saniye.</li>
-                    <li><img src="https://picsum.photos/id/32/60/60" alt="Squat Jumps"><i class="fas fa-angle-right"></i> **Squat Jumps (Zıplamalı Çömelme):** 45 saniye.</li>
-                    <li><img src="https://picsum.photos/id/34/60/60" alt="Burpee"><i class="fas fa-angle-right"></i> **Burpee:** 45 saniye.</li>
-                    <li><img src="https://picsum.photos/id/36/60/60" alt="Mountain Climber"><i class="fas fa-angle-right"></i> **Mountain Climber (Dağcı Tırmanışı):** 45 saniye.</li>
-                    <li><i class="fas fa-angle-right"></i>**Dinlenme:** Her tur arasında 60 saniye dinlenerek 4 tur tamamlayın.</li>
-                </ul>
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="beslenme.html" class="btn btn-secondary" style="background-color: var(--secondary-color); color: white; padding: 15px 35px; border-radius: 5px; text-transform: uppercase; text-decoration: none;">Beslenmeyle Gücünü Arttır <i class="fas fa-chevron-right"></i></a>
             </div>
 
-            <div class="day-plan">
-                <h3><i class="fas fa-calendar-alt"></i> 3. Gün: Stabil Kardiyo</h3>
-                <p>Hafif ile orta tempoda, kalp atış hızınızı sabit tutarak yapılan uzun süreli antrenmandır.</p>
-                <ul class="exercise-list">
-                    <li><img src="https://picsum.photos/id/38/60/60" alt="Bisiklet"><i class="fas fa-angle-right"></i> **Bisiklet / Koşu Bandı / Eliptik:** 45 - 60 dakika.</li>
-                    <li><i class="fas fa-angle-right"></i> **Tempo:** Konuşabilecek kadar rahat, ancak terlemeye başlayacak kadar hızlı tempo.</li>
-                </ul>
-            </div>
-
-            <div class="day-plan">
-                <h3><i class="fas fa-calendar-alt"></i> 4. Gün: Tam Vücut Güç & Dayanıklılık</h3>
-                <ul class="exercise-list">
-                    <li><img src="https://picsum.photos/id/40/60/60" alt="Kettlebell Swing"><i class="fas fa-angle-right"></i> **Kettlebell Swing:** 3 set x 15 tekrar.</li>
-                    <li><img src="https://picsum.photos/id/42/60/60" alt="Dumbbell Thruster"><i class="fas fa-angle-right"></i> **Dumbbell Thruster:** 3 set x 12 tekrar.</li>
-                    <li><img src="https://picsum.photos/id/44/60/60" alt="Plank"><i class="fas fa-angle-right"></i> **Plank:** 3 set (maksimum süre).</li>
-                </ul>
-            </div>
-            
-            <p style="margin-top: 40px; border-left: 3px solid var(--primary-color); padding-left: 10px; font-style: italic;">**Önerilen Programlama:** Pazartesi, Çarşamba, Cuma, Cumartesi (Salı, Perşembe, Pazar dinlenme). Antrenmanlar arası aktif dinlenmeye (hafif yürüyüş/esneme) önem verin.</p>
         </div>
     </section>
 
     <footer>
         <div class="container">
             <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Akıllı Header JavaScript Kodu
+        let lastScrollY = 0;
+        const header = document.querySelector('header');
+        let headerHeight = 0;
+        if(header) {
+             headerHeight = header.offsetHeight;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!header) return;
+
+            const currentScrollY = window.scrollY;
+
+            // Aşağı kaydırılıyor VE header başlangıç pozisyonundan ayrılmış
+            if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
+                header.classList.add('header-hidden');
+            } 
+            // Yukarı kaydırılıyor VEYA sayfanın en üstüne yaklaşıldı
+            else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+                header.classList.remove('header-hidden');
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+    </script>
 
 </body>
 </html>
