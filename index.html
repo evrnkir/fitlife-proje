@@ -41,12 +41,12 @@
         }
 
         /* ----------------------------------- */
-        /* BAŞLIK VE NAVİGASYON (AKILLI STICKY) */
+        /* BAŞLIK VE NAVİGASYON (KOMPAKT STICKY) */
         /* ----------------------------------- */
         header {
             background: var(--dark-bg);
             color: white;
-            padding: 10px 0; 
+            padding: 8px 0; /* KOMPAKT: Küçültülmüş padding */
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             position: sticky; 
@@ -63,13 +63,18 @@
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.95em; 
+            font-size: 0.9em; /* KOMPAKT: Küçültülmüş link fontu */
             transition: color 0.3s;
         }
         
         header h1 {
             font-size: 1.6em; 
             float: left;
+        }
+        
+        /* Başlık Fontu Daha da Küçültüldü */
+        header h1 a {
+             font-size: 1.4em; /* KOMPAKT: Küçültülmüş başlık fontu */
         }
 
         header ul {
@@ -174,7 +179,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-top: 4px solid var(--secondary-color);
             transition: transform 0.3s;
-            height: 100%; /* Kartların eşit boyda olmasını sağlar */
+            height: 100%; 
         }
 
         .program-card-item:hover {
@@ -200,7 +205,7 @@
         /* BÜLTEN KAYDI (CTA) BÖLÜMÜ STİLLERİ */
         /* ----------------------------------- */
         #newsletter {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #343a40 100%); /* Koyu degrade arka plan */
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #343a40 100%); 
             color: white;
             text-align: center;
             padding: 70px 20px;
@@ -210,7 +215,7 @@
         #newsletter h2 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            color: var(--accent-color); /* Sarı/Turuncu Vurgu */
+            color: var(--accent-color); 
             font-weight: 700;
         }
 
@@ -424,10 +429,7 @@
             // Kullanıcıya bir mesaj göster
             successMessage.style.display = 'block';
 
-            // Formun varsayılan gönderimini Formspree'ye bırakıyoruz.
             // 1 saniye sonra teşekkürler sayfasına yönlendir.
-            // Bu, Formspree'nin gönderimi tamamladığını VEYA hata verdiğini varsayar,
-            // ancak ücretsiz hesapta en iyi kullanıcı deneyimi budur.
             setTimeout(() => {
                 // KENDİ GITHUB SAYFANIZIN YOLUNU KULLANARAK YÖNLENDİRİYORUZ
                 window.location.href = 'https://evmkir.github.io/fitlife-proje/tesekkurler.html'; 

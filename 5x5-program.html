@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Güç Odaklı Program (5x5) | FitLife</title>
+    <title>FitLife | Güç ve Kas İnşası (5x5) Programı</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -41,15 +41,14 @@
         }
 
         /* ----------------------------------- */
-        /* BAŞLIK VE NAVİGASYON (AKILLI STICKY) */
+        /* BAŞLIK VE NAVİGASYON (KOMPAKT STICKY) - GÜNCELLENDİ */
         /* ----------------------------------- */
         header {
             background: var(--dark-bg);
             color: white;
-            padding: 10px 0; 
+            padding: 8px 0; /* KOMPAKT */
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            
             position: sticky; 
             top: 0;           
             z-index: 1000;    
@@ -64,93 +63,114 @@
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.95em; 
+            font-size: 0.9em; /* KOMPAKT */
             transition: color 0.3s;
         }
         
-        header h1 a {
+        header h1 {
             font-size: 1.6em; 
+            float: left;
+        }
+        
+        header h1 a {
+             font-size: 1.4em; /* KOMPAKT */
         }
 
         header ul {
             padding: 0;
             list-style: none;
             float: right;
-            margin-top: 0;
+            margin-top: 5px;
         }
 
         header li {
             display: inline-block;
             padding: 0 10px; 
         }
-        
+
         /* ----------------------------------- */
-        /* DETAY SAYFASI GÖRSEL REHBER STİLLERİ */
+        /* PROGRAM SAYFASI İÇERİK STİLLERİ */
         /* ----------------------------------- */
-        #program-detail {
-            padding: 50px 0;
-            background-color: white;
-            border-radius: 10px;
-            margin-top: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        #program-details {
+            background: white;
+            text-align: left;
         }
-        
-        #program-detail h2 {
+
+        #program-details h2 {
             color: var(--primary-color);
-            text-align: center;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 15px;
             margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        
+        #program-details h3 {
+            color: var(--secondary-color);
+            margin-top: 30px;
         }
 
-        .video-guide-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .exercise-card {
+        .program-feature {
             background: var(--light-bg);
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid var(--secondary-color);
-        }
-        
-        .exercise-card h3 {
-            color: var(--dark-bg);
-            margin-top: 0;
-        }
-        
-        /* GÖRSEL ALANI STİLİ */
-        .image-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             margin-bottom: 15px;
-            /* Resim oranını korur */
-            aspect-ratio: 16 / 9; 
-            object-fit: cover;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .steps-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .steps-list li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
+        .program-feature i {
+            color: var(--secondary-color);
+            margin-right: 10px;
         }
         
-        .steps-list li::before {
-            content: "✓";
-            color: var(--primary-color);
-            font-weight: bold;
+        .program-schedule {
+            margin-top: 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .program-schedule ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .program-schedule li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .program-schedule li:last-child {
+            border-bottom: none;
+        }
+        
+        .btn-call-to-action {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .btn {
             display: inline-block;
-            width: 1em;
-            margin-left: -1em;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
         }
         
         /* ----------------------------------- */
@@ -161,12 +181,25 @@
             color: white;
             padding: 30px 0;
             text-align: center;
-            margin-top: 50px;
+            margin-top: 40px;
+        }
+
+        footer .social-links a {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s;
         }
         
+        footer .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Responsive Ayarlar */
         @media(max-width: 768px) {
             header li { display: block; padding: 5px 0; }
-            .video-guide-grid { grid-template-columns: 1fr; }
+            header nav { float: none; text-align: center; }
+            header h1 { float: none; text-align: center; }
         }
     </style>
 </head>
@@ -175,7 +208,9 @@
     <header>
         <div class="container">
             <div id="branding">
-                <h1><a href="index.html">FitLife</a></h1>
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>FITLIFE</h1>
+                </a>
             </div>
             <nav>
                 <ul>
@@ -188,59 +223,36 @@
         </div>
     </header>
 
-    <section id="program-detail" class="section-padding">
+    <section id="program-details" class="section-padding">
         <div class="container">
-            <p style="text-align: center; color: var(--secondary-color); font-weight: bold; font-size: 1.1em;">
-                <a href="index.html#programlar" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-arrow-left"></i> Tüm Programlara Dön</a>
-            </p>
+            <h2><i class="fas fa-dumbbell"></i> Güç ve Kas İnşası (5x5 Sistemi)</h2>
             
-            <h2>Güç Odaklı 5x5 Programı: Resimli Rehber</h2>
-            <p style="text-align: center; margin-bottom: 50px;">
-                Temel hareketlerin doğru formu aşağıdadır. Lütfen hareket resimlerini ve talimatları dikkatle izleyin.
-            </p>
+            <p>5x5 sistemi, temel bileşik hareketlere odaklanarak kısa sürede maksimum güç artışı ve sağlam bir kas kütlesi inşa etmenizi sağlar. Basit, kanıtlanmış ve etkili bir yaklaşımdır.</p>
 
-            <div class="video-guide-grid">
-                
-                <div class="exercise-card">
-                    <h3>1. Bench Press (Yatarak Halter İtme)</h3>
-                    <div class="image-container">
-                        <img src="img/bench.jpeg" alt="Bench Press Hareketi Resmi">
-                        <p style="font-size: 0.9em; text-align: center; margin-top: 5px; color: #666;">
-                            **bench.jpeg** resminiz burada gösterilmektedir.
-                        </p>
-                    </div>
-                    <h4>Temel Form İpuçları:</h4>
-                    <ul class="steps-list">
-                        <li>**Sırtı Kilitle:** Kürek kemiklerini sıkıştır ve sırtını sehpaya doğru kemer yap.</li>
-                        <li>**Ayak Desteği:** Ayaklarını yere sağlam bas ve itme gücü al.</li>
-                        <li>**İndir:** Barı göğüs kemiğine doğru yavaşça, kontrollü bir şekilde indir (dirsekler 45 derece).</li>
-                        <li>**İtme:** Bileklerini düz tutarak barı güçlüce yukarı it.</li>
-                    </ul>
-                </div>
-                
-                <div class="exercise-card">
-                    <h3>2. Lat Pull Down (Aşağı Çekme)</h3>
-                    <div class="image-container">
-                        <img src="img/lat.jpeg" alt="Lat Pull Down Hareketi Resmi">
-                        <p style="font-size: 0.9em; text-align: center; margin-top: 5px; color: #666;">
-                            **lat.jpeg** resminiz burada gösterilmektedir.
-                        </p>
-                    </div>
-                    <h4>Temel Form İpuçları:</h4>
-                    <ul class="steps-list">
-                        <li>**Kilitle:** Makinenin bacak pedlerini sıkıca kilitle.</li>
-                        <li>**Tutuş:** Geniş tutuşla barı kavra.</li>
-                        <li>**Gövde:** Gövdeni hafifçe geriye yasla (doğru açıyı koru).</li>
-                        <li>**Çekme:** Barı göğsünün üst kısmına doğru, **sırt kaslarını (kanat)** sıkarak çek.</li>
-                    </ul>
-                </div>
-                
+            <h3>Programın Ana Özellikleri</h3>
+            <div class="program-feature">
+                <i class="fas fa-weight-hanging"></i> **Bileşik Hareket Odaklı:** Squat, Bench Press, Deadlift gibi temel hareketler.
             </div>
-            
-            <div style="text-align: center; margin-top: 60px;">
-                <a href="iletisim.html" class="btn btn-primary" style="padding: 15px 35px; border-radius: 5px; text-transform: uppercase;">Kişisel Program Talep Et</a>
+            <div class="program-feature">
+                <i class="fas fa-chart-line"></i> **İlerleyici Aşırı Yükleme:** Her antrenmanda ağırlık artışıyla sürekli gelişim.
+            </div>
+            <div class="program-feature">
+                <i class="fas fa-calendar-alt"></i> **Haftada 3 Gün:** Kasların toparlanması için yeterli dinlenme süresi.
             </div>
 
+            <h3>Örnek Haftalık Program Akışı (3 Gün)</h3>
+            <div class="program-schedule">
+                <ul>
+                    <li><i class="far fa-calendar-check"></i> **Pazartesi (A Antrenmanı):** Squat (5x5), Bench Press (5x5), Barbell Row (5x5).</li>
+                    <li><i class="far fa-calendar-check"></i> **Çarşamba (B Antrenmanı):** Squat (5x5), Overhead Press (5x5), Deadlift (1x5).</li>
+                    <li><i class="far fa-calendar-check"></i> **Cuma (A Antrenmanı Tekrarı):** Squat (5x5), Bench Press (5x5), Barbell Row (5x5).</li>
+                    <li><i class="far fa-calendar-check"></i> **Hafta Sonu:** Aktif Dinlenme ve Toparlanma.</li>
+                </ul>
+            </div>
+            
+            <div class="btn-call-to-action">
+                <a href="iletisim.html" class="btn btn-primary">5x5 Programına Başla</a>
+            </div>
         </div>
     </section>
 
@@ -281,6 +293,5 @@
             lastScrollY = currentScrollY;
         });
     </script>
-
 </body>
 </html>

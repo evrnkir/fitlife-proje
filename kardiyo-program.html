@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kardiyo Programı | FitLife</title>
+    <title>FitLife | Yağ Yakımı ve Kardiyo Programı</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -12,8 +12,8 @@
         /* GENEL AYARLAR VE RENKLER */
         /* ----------------------------------- */
         :root {
-            --primary-color: #007bff; /* Fitness Mavisi */
-            --secondary-color: #dc3545; /* Kırmızı (Kardiyo/Enerji) */
+            --primary-color: #007bff; 
+            --secondary-color: #28a745; 
             --dark-bg: #212529; 
             --light-bg: #f8f9fa; 
             --accent-color: #ffc107; 
@@ -41,12 +41,12 @@
         }
 
         /* ----------------------------------- */
-        /* BAŞLIK VE NAVİGASYON (AKILLI STICKY) */
+        /* BAŞLIK VE NAVİGASYON (KOMPAKT STICKY) - GÜNCELLENDİ */
         /* ----------------------------------- */
         header {
             background: var(--dark-bg);
             color: white;
-            padding: 10px 0; 
+            padding: 8px 0; /* KOMPAKT */
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             position: sticky; 
@@ -63,96 +63,114 @@
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.95em; 
+            font-size: 0.9em; /* KOMPAKT */
             transition: color 0.3s;
         }
         
-        header h1 a {
+        header h1 {
             font-size: 1.6em; 
+            float: left;
+        }
+        
+        header h1 a {
+             font-size: 1.4em; /* KOMPAKT */
         }
 
         header ul {
             padding: 0;
             list-style: none;
             float: right;
-            margin-top: 0;
+            margin-top: 5px;
         }
 
         header li {
             display: inline-block;
             padding: 0 10px; 
         }
-        
+
         /* ----------------------------------- */
-        /* KARDİYO İÇERİK STİLLERİ */
+        /* PROGRAM SAYFASI İÇERİK STİLLERİ */
         /* ----------------------------------- */
-        #program-detail {
-            padding: 50px 0;
-            background-color: white;
-            border-radius: 10px;
-            margin-top: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        #program-details {
+            background: white;
+            text-align: left;
         }
-        
-        #program-detail h2 {
-            color: var(--secondary-color); /* Kırmızı vurgu */
-            text-align: center;
+
+        #program-details h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 15px;
             margin-bottom: 20px;
-        }
-
-        .cardio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .program-card {
-            background: var(--light-bg);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-top: 5px solid var(--secondary-color);
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 2.5em;
         }
         
-        .program-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .program-card h3 {
-            color: var(--dark-bg);
-            margin-top: 0;
-            border-bottom: 2px dashed var(--secondary-color);
-            padding-bottom: 10px;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 200px; /* Sabit yükseklik */
-            border-radius: 5px;
-            object-fit: cover; /* Resmi sığdırır */
-            margin-bottom: 15px;
-        }
-
-        .details-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .details-list li {
-            margin-bottom: 10px;
-            padding-left: 15px;
-            position: relative;
-            font-weight: 500;
-        }
-        
-        .details-list li i {
+        #program-details h3 {
             color: var(--secondary-color);
-            position: absolute;
-            left: 0;
-            top: 2px;
+            margin-top: 30px;
+        }
+
+        .program-feature {
+            background: var(--light-bg);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .program-feature i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+        
+        .program-schedule {
+            margin-top: 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .program-schedule ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .program-schedule li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .program-schedule li:last-child {
+            border-bottom: none;
+        }
+        
+        .btn-call-to-action {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
         }
         
         /* ----------------------------------- */
@@ -163,12 +181,25 @@
             color: white;
             padding: 30px 0;
             text-align: center;
-            margin-top: 50px;
+            margin-top: 40px;
+        }
+
+        footer .social-links a {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s;
         }
         
+        footer .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Responsive Ayarlar */
         @media(max-width: 768px) {
             header li { display: block; padding: 5px 0; }
-            .cardio-grid { grid-template-columns: 1fr; }
+            header nav { float: none; text-align: center; }
+            header h1 { float: none; text-align: center; }
         }
     </style>
 </head>
@@ -177,7 +208,9 @@
     <header>
         <div class="container">
             <div id="branding">
-                <h1><a href="index.html">FitLife</a></h1>
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>FITLIFE</h1>
+                </a>
             </div>
             <nav>
                 <ul>
@@ -190,71 +223,38 @@
         </div>
     </header>
 
-    <section id="program-detail" class="section-padding">
+    <section id="program-details" class="section-padding">
         <div class="container">
-            <p style="text-align: center; color: var(--primary-color); font-weight: bold; font-size: 1.1em;">
-                <a href="index.html#programlar" style="color: var(--primary-color); text-decoration: none;"><i class="fas fa-arrow-left"></i> Tüm Programlara Dön</a>
-            </p>
+            <h2><i class="fas fa-running"></i> Yağ Yakımı ve Kardiyo Programı</h2>
             
-            <h2>Kardiyo Programları: Kalp ve Dayanıklılık</h2>
-            <p style="text-align: center; margin-bottom: 50px; font-size: 1.1em;">
-                İhtiyacınıza en uygun kardiyo yöntemini seçin. İster hızlı yağ yakımı, ister uzun süreli dayanıklılık!
-            </p>
+            <p>Bu program, dayanıklılığınızı artırmak, kalori yakımını maksimize etmek ve genel kondisyon seviyenizi hızla yükseltmek için tasarlanmıştır. Tüm seviyelere uygun, dinamik ve enerjik bir süreç sizi bekliyor.</p>
 
-            <div class="cardio-grid">
-                
-                <div class="program-card">
-                    <h3><i class="fas fa-bolt" style="color: var(--secondary-color);"></i> Yüksek Yoğunluklu Aralık Antrenmanı (HIIT)</h3>
-                    
-                    <div class="image-container">
-                        <img src="https://picsum.photos/800/450?random=hiit" alt="HIIT Antrenmanı Görseli">
-                        <p style="font-size: 0.85em; text-align: center; margin-top: 5px; color: #666;">
-                            *Bu görseli kendi **HIIT** resminizle/GIF'inizle değiştirin.
-                        </p>
-                    </div>
-                    
-                    <p>
-                        Kısa sürede maksimum efor harcayarak metabolizmayı hızlandıran, en etkili yağ yakma yöntemidir.
-                    </p>
-
-                    <h4>Temel Detaylar:</h4>
-                    <ul class="details-list">
-                        <li><i class="fas fa-clock"></i> Süre: **15-25 dakika**</li>
-                        <li><i class="fas fa-fire"></i> Odak: Hızlı yağ yakımı, dayanıklılık artışı.</li>
-                        <li><i class="fas fa-redo-alt"></i> Örnek: 30 saniye depar + 60 saniye yürüme (8-10 tekrar).</li>
-                        <li><i class="fas fa-heartbeat"></i> Haftalık: 3-4 gün (Dinlenmeyi unutmayın).</li>
-                    </ul>
-                </div>
-                
-                <div class="program-card">
-                    <h3><i class="fas fa-running" style="color: var(--secondary-color);"></i> Düşük Yoğunluklu Sabit Durum (LISS)</h3>
-                    
-                    <div class="image-container">
-                        <img src="https://picsum.photos/800/450?random=liss" alt="LISS Antrenmanı Görseli">
-                        <p style="font-size: 0.85em; text-align: center; margin-top: 5px; color: #666;">
-                            *Bu görseli kendi **LISS** resminizle/GIF'inizle değiştirin.
-                        </p>
-                    </div>
-                    
-                    <p>
-                        Düşük ve sabit tempoda uzun süre yapılan bu kardiyo, kalbi yormadan yağ yakımını destekler.
-                    </p>
-
-                    <h4>Temel Detaylar:</h4>
-                    <ul class="details-list">
-                        <li><i class="fas fa-clock"></i> Süre: **45-60 dakika**</li>
-                        <li><i class="fas fa-burn"></i> Odak: Kalp sağlığı, genel dayanıklılık.</li>
-                        <li><i class="fas fa-walking"></i> Örnek: Yüksek tempoda yürüyüş, hafif koşu, bisiklet.</li>
-                        <li><i class="fas fa-calendar-alt"></i> Haftalık: 4-6 gün (İyileşmeyi destekler).</li>
-                    </ul>
-                </div>
-                
+            <h3>Programın Ana Özellikleri</h3>
+            <div class="program-feature">
+                <i class="fas fa-fire"></i> **Yüksek Yoğunluklu Aralık Antrenmanı (HIIT):** Kısa sürede maksimum kalori yakımı.
             </div>
-            
-            <div style="text-align: center; margin-top: 60px;">
-                <a href="beslenme.html" class="btn btn-secondary" style="background-color: var(--secondary-color); color: white; padding: 15px 35px; border-radius: 5px; text-transform: uppercase; text-decoration: none;">Beslenmeyle Gücünü Arttır <i class="fas fa-chevron-right"></i></a>
+            <div class="program-feature">
+                <i class="fas fa-heartbeat"></i> **Kardiyovasküler Sağlık:** Kalp ve damar sisteminizi güçlendirir.
+            </div>
+            <div class="program-feature">
+                <i class="fas fa-clock"></i> **Esnek Süreler:** İhtiyaca göre 30 dakikalık hızlı seanslar veya 60 dakikalık tam seanslar.
             </div>
 
+            <h3>Örnek Haftalık Program Akışı</h3>
+            <div class="program-schedule">
+                <ul>
+                    <li><i class="far fa-calendar-check"></i> **Pazartesi:** 30 Dakika Tempolu Koşu ve Hafif Germe.</li>
+                    <li><i class="far fa-calendar-check"></i> **Salı:** HIIT Protokolü (20 sn Çalışma / 10 sn Dinlenme).</li>
+                    <li><i class="far fa-calendar-check"></i> **Çarşamba:** Aktif Dinlenme (Yoga veya Uzun Yürüyüş).</li>
+                    <li><i class="far fa-calendar-check"></i> **Perşembe:** 45 Dakika Orta Yoğunlukta Bisiklet veya Eliptik.</li>
+                    <li><i class="far fa-calendar-check"></i> **Cuma:** HIIT Protokolü (Patlayıcı hareketler).</li>
+                    <li><i class="far fa-calendar-check"></i> **Cumartesi-Pazar:** İsteğe Bağlı Serbest Günler.</li>
+                </ul>
+            </div>
+            
+            <div class="btn-call-to-action">
+                <a href="iletisim.html" class="btn btn-primary">Kardiyo Programına Başla</a>
+            </div>
         </div>
     </section>
 
@@ -295,6 +295,5 @@
             lastScrollY = currentScrollY;
         });
     </script>
-
 </body>
 </html>
