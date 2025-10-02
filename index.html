@@ -43,46 +43,54 @@
         /* ----------------------------------- */
         /* BAŞLIK VE NAVİGASYON */
         /* ----------------------------------- */
-        header {
-            background: var(--dark-bg);
-            color: white;
-            padding: 15px 0;
-            border-bottom: var(--primary-color) 4px solid;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            
-            /* SABİT BAŞLIK (STICKY HEADER) */
-            position: sticky; 
-            top: 0;           
-            z-index: 1000;    
-        }
+        /* ----------------------------------- */
+/* BAŞLIK VE NAVİGASYON (KOMPAKT) */
+/* ----------------------------------- */
+header {
+    background: var(--dark-bg);
+    color: white;
+    /* Dikey dolguyu azalttık: 15px yerine 10px */
+    padding: 10px 0; 
+    border-bottom: var(--primary-color) 4px solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
+    /* SABİT BAŞLIK (STICKY HEADER) */
+    position: sticky; 
+    top: 0;           
+    z-index: 1000;    
+}
 
-        header a {
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 1em;
-            transition: color 0.3s;
-        }
+header a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    /* Yazı boyutunu hafifçe küçülttük */
+    font-size: 0.95em; 
+    transition: color 0.3s;
+}
 
-        header a:hover {
-            color: var(--accent-color);
-        }
-        
-        header h1 a {
-            font-size: 1.8em;
-        }
+header a:hover {
+    color: var(--accent-color);
+}
 
-        header ul {
-            padding: 0;
-            list-style: none;
-            float: right;
-            margin-top: 5px;
-        }
+header h1 a {
+    /* Logo başlığını biraz küçülttük */
+    font-size: 1.6em; 
+}
 
-        header li {
-            display: inline-block;
-            padding: 0 10px;
-        }
+header ul {
+    padding: 0;
+    list-style: none;
+    float: right;
+    /* Üst boşluğu kaldırdık */
+    margin-top: 0; 
+}
+
+header li {
+    display: inline-block;
+    /* Yatay dolguyu koruduk */
+    padding: 0 10px; 
+}
 
         /* ----------------------------------- */
         /* BUTONLAR (CTA) */
