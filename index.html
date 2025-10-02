@@ -8,15 +8,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
+        /* ----------------------------------- */
+        /* GENEL AYARLAR VE RENKLER */
+        /* ----------------------------------- */
         :root {
-            --primary-color: #007bff; /* Mavi - Fitness Marka Rengi */
-            --secondary-color: #28a745; /* Yeşil - Sağlık/CTA Rengi */
-            --dark-bg: #212529; /* Koyu Zemin */
+            --primary-color: #007bff; /* Fitness Mavisi (Canlı) */
+            --secondary-color: #28a745; /* Yeşil (Vurgu/Sağlık) */
+            --dark-bg: #212529; /* Koyu Zemin (Başlık/Alt Bilgi) */
             --light-bg: #f8f9fa; /* Açık Zemin */
+            --accent-color: #ffc107; /* Sarı/Turuncu (CTA) */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: var(--font-family);
             margin: 0;
             padding: 0;
             background-color: var(--light-bg);
@@ -25,64 +30,70 @@
         }
 
         .container {
-            width: 80%;
+            width: 90%; /* Geniş ekranlarda daha fazla yer kaplasın */
+            max-width: 1200px;
             margin: auto;
             overflow: hidden;
         }
+        
+        .section-padding {
+            padding: 60px 0; /* Daha ferah bir görüntü */
+        }
 
-        /* Başlık ve Navigasyon */
+        /* ----------------------------------- */
+        /* BAŞLIK VE NAVİGASYON */
+        /* ----------------------------------- */
         header {
             background: var(--dark-bg);
             color: white;
-            padding-top: 20px;
-            min-height: 70px;
-            border-bottom: var(--primary-color) 3px solid;
+            padding: 15px 0;
+            border-bottom: var(--primary-color) 4px solid;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         header a {
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 16px;
+            font-size: 1em;
             transition: color 0.3s;
         }
 
         header a:hover {
-            color: var(--primary-color);
+            color: var(--accent-color);
+        }
+        
+        header h1 a {
+            font-size: 1.8em;
         }
 
         header ul {
             padding: 0;
             list-style: none;
+            float: right;
+            margin-top: 5px;
         }
 
         header li {
-            float: left;
-            display: inline;
-            padding: 0 15px 0 15px;
+            display: inline-block;
+            padding: 0 10px;
         }
 
-        header #branding {
-            float: left;
-        }
-
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-
-        /* CTA Butonları */
+        /* ----------------------------------- */
+        /* BUTONLAR (CTA) */
+        /* ----------------------------------- */
         .btn {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 50px; /* Daha modern yuvarlak butonlar */
             font-weight: bold;
             text-transform: uppercase;
             text-align: center;
             text-decoration: none;
-            transition: background-color 0.3s, color 0.3s;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary {
@@ -97,56 +108,66 @@
 
         .btn-primary:hover {
             background: #0056b3;
+            transform: translateY(-2px);
+        }
+        .btn-secondary:hover {
+            background: #1e7e34;
+            transform: translateY(-2px);
         }
 
-        /* Hero Alanı */
+
+        /* ----------------------------------- */
+        /* HERO ALANI */
+        /* ----------------------------------- */
         #hero {
-            min-height: 400px;
-            background: url('https://picsum.photos/1200/400?random=1') no-repeat center center/cover;
+            min-height: 450px;
+            background: url('https://picsum.photos/1200/450?random=1') no-repeat center center/cover;
             text-align: center;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); 
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5); /* Daha koyu maske */
         }
 
         #hero h2 {
-            font-size: 4em;
+            font-size: 4.5em;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        
+        #hero p {
+            font-size: 1.4em;
+            margin-bottom: 30px;
         }
 
-        /* Günün İpucu Alanı */
+        /* ----------------------------------- */
+        /* GÜNÜN İPUCU (CARD) */
+        /* ----------------------------------- */
         #tip-of-day {
             background: var(--primary-color);
             color: white;
             padding: 30px 0;
             text-align: center;
         }
-
+        
         .tip-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .tip-card h3 {
-            margin-top: 0;
-        }
-
-        /* Programlar (Grid) */
+        /* ----------------------------------- */
+        /* PROGRAM KARTLARI (ANA SAYFA) */
+        /* ----------------------------------- */
         #programlar {
             text-align: center;
         }
-
-        .section-padding {
-            padding: 40px 0;
-        }
-
+        
         .program-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 30px;
         }
@@ -165,51 +186,84 @@
         .program-card {
             background: white;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-top: 5px solid var(--secondary-color);
         }
 
         .program-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .program-card i {
-            font-size: 3em;
-            color: var(--secondary-color);
+            font-size: 3.5em;
+            color: var(--primary-color);
             margin-bottom: 15px;
         }
-
-        /* E-posta Alanı */
-        #newsletter {
-            background: var(--light-bg);
+        
+        .program-card h4 {
+            color: var(--dark-bg);
+            font-size: 1.5em;
         }
 
-        #newsletter input[type="email"] {
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 60%;
-            max-width: 300px;
+        /* ----------------------------------- */
+        /* DETAY SAYFASI ORTAK STİLLERİ (Ana sayfada kullanılmasa da uyum için tutuldu) */
+        /* ----------------------------------- */
+        #program-detail {
+            padding: 50px 0;
+        }
+        
+        .exercise-list li img {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 2px solid white;
         }
 
-        /* Footer */
+        /* ----------------------------------- */
+        /* FOOTER */
+        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
-            padding: 20px 0;
+            padding: 30px 0;
             text-align: center;
+            margin-top: 0;
         }
 
         .social-links a {
             color: white;
-            font-size: 1.5em;
+            font-size: 1.8em;
             margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
         }
 
-        /* Mobil Uyum (768px altı) */
+        /* ----------------------------------- */
+        /* MOBİL UYUM (RESPONSIVE DESIGN) */
+        /* ----------------------------------- */
+        @media(max-width: 992px) {
+            .container {
+                width: 95%;
+            }
+            header nav ul {
+                text-align: center;
+                float: none;
+                margin-top: 10px;
+            }
+            header li {
+                padding: 0 8px;
+            }
+        }
+        
         @media(max-width: 768px) {
             header #branding,
             header nav {
@@ -217,13 +271,24 @@
                 text-align: center;
                 width: 100%;
             }
-
+            header li {
+                display: block; /* Menü dikey hale gelsin */
+                padding: 5px 0;
+            }
             header nav ul {
-                display: none;
+                display: block;
             }
 
             #hero h2 {
                 font-size: 3em;
+            }
+            
+            #hero p {
+                font-size: 1.1em;
+            }
+
+            .program-grid {
+                grid-template-columns: 1fr; /* Tek sütunlu hale gelsin */
             }
         }
     </style>
@@ -233,14 +298,14 @@
     <header>
         <div class="container">
             <div id="branding">
-                <h1><a href="fitlife.html">FitLife</a></h1>
+                <h1><a href="index.html">FitLife</a></h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="fitlife.html#programlar">Antrenman Programları</a></li>
-                    <li><a href="fitlife.html#beslenme">Beslenme</a></li>
-                    <li><a href="fitlife.html#egitmenler">Eğitmenler</a></li>
-                    <li><a href="fitlife.html#iletisim" class="cta-button">Hemen Başla</a></li>
+                    <li><a href="index.html#programlar">Antrenman Programları</a></li>
+                    <li><a href="beslenme.html">Beslenme</a></li>
+                    <li><a href="index.html#egitmenler">Eğitmenler</a></li>
+                    <li><a href="index.html#iletisim" class="btn btn-primary">Hemen Başla</a></li>
                 </ul>
             </nav>
         </div>
@@ -250,7 +315,7 @@
         <div class="hero-content">
             <h2>Hayatınızı Yeniden Şekillendirin.</h2>
             <p>Profesyonel rehberlik, kişiye özel planlar ve kalıcı sonuçlar.</p>
-            <a href="fitlife.html#programlar" class="btn btn-primary">Programları Keşfet</a>
+            <a href="index.html#programlar" class="btn btn-primary">Programları Keşfet</a>
         </div>
     </section>
 

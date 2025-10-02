@@ -8,16 +8,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* Ana sayfadaki tüm CSS kodunu buraya kopyala yapıştır! */
+        /* Lütfen buraya 1. adımdaki TÜM YENİ CSS kodunu kopyalayın */
+        /* ----------------------------------- */
+        /* GENEL AYARLAR VE RENKLER */
+        /* ----------------------------------- */
         :root {
-            --primary-color: #007bff;
-            --secondary-color: #28a745;
-            --dark-bg: #212529;
-            --light-bg: #f8f9fa;
+            --primary-color: #007bff; /* Fitness Mavisi (Canlı) */
+            --secondary-color: #28a745; /* Yeşil (Vurgu/Sağlık) */
+            --dark-bg: #212529; /* Koyu Zemin (Başlık/Alt Bilgi) */
+            --light-bg: #f8f9fa; /* Açık Zemin */
+            --accent-color: #ffc107; /* Sarı/Turuncu (CTA) */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: var(--font-family);
             margin: 0;
             padding: 0;
             background-color: var(--light-bg);
@@ -26,70 +31,110 @@
         }
 
         .container {
-            width: 80%;
+            width: 90%; /* Geniş ekranlarda daha fazla yer kaplasın */
+            max-width: 1200px;
             margin: auto;
             overflow: hidden;
         }
+        
+        .section-padding {
+            padding: 60px 0; /* Daha ferah bir görüntü */
+        }
 
+        /* ----------------------------------- */
+        /* BAŞLIK VE NAVİGASYON */
+        /* ----------------------------------- */
         header {
             background: var(--dark-bg);
             color: white;
-            padding-top: 20px;
-            min-height: 70px;
-            border-bottom: var(--primary-color) 3px solid;
+            padding: 15px 0;
+            border-bottom: var(--primary-color) 4px solid;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        
+
         header a {
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 16px;
+            font-size: 1em;
             transition: color 0.3s;
+        }
+
+        header a:hover {
+            color: var(--accent-color);
+        }
+        
+        header h1 a {
+            font-size: 1.8em;
         }
 
         header ul {
             padding: 0;
             list-style: none;
+            float: right;
+            margin-top: 5px;
         }
 
         header li {
-            float: left;
-            display: inline;
-            padding: 0 15px 0 15px;
-        }
-
-        header #branding {
-            float: left;
-        }
-
-        header nav {
-            float: right;
-            margin-top: 10px;
+            display: inline-block;
+            padding: 0 10px;
         }
         
-        /* Program İçeriği Stili */
+        /* ----------------------------------- */
+        /* BUTONLAR (CTA) */
+        /* ----------------------------------- */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px; /* Daha modern yuvarlak butonlar */
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        /* ----------------------------------- */
+        /* DETAY SAYFASI STİLLERİ */
+        /* ----------------------------------- */
         #program-detail {
             padding: 50px 0;
         }
 
         #program-detail h2 {
             color: var(--primary-color);
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 15px;
             margin-bottom: 30px;
+            font-size: 2.2em;
         }
         
         .day-plan {
             background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--secondary-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--secondary-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .day-plan h3 {
             color: var(--dark-bg);
             margin-top: 0;
+            font-size: 1.5em;
         }
 
         .exercise-list {
@@ -98,40 +143,50 @@
         }
         
         .exercise-list li {
-            background: #f4f4f4;
-            margin-bottom: 8px;
-            padding: 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            display: flex; /* Görsel ve metni yan yana hizalamak için */
-            align-items: center; /* Dikeyde ortalamak için */
+            background: #e9ecef; /* Daha belirgin arka plan */
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .exercise-list li:hover {
+            background-color: #dee2e6;
         }
 
         .exercise-list li img {
-            width: 50px; /* Görsel boyutu */
-            height: 50px;
-            margin-right: 15px; /* Metinle arasında boşluk */
-            border-radius: 5px; /* Köşeleri yuvarla */
-            object-fit: cover; /* Görselin orantısını koru */
+            width: 60px; /* Görsel boyutu büyütüldü */
+            height: 60px;
+            margin-right: 20px;
+            border-radius: 8px;
+            object-fit: cover;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 2px solid white; /* Hafif çerçeve */
         }
-        
-        /* Footer Stili */
+
+        /* ----------------------------------- */
+        /* FOOTER */
+        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
+            padding: 30px 0;
             text-align: center;
-            padding: 20px 0;
             margin-top: 50px;
         }
 
         .social-links a {
             color: white;
-            font-size: 1.5em;
+            font-size: 1.8em;
             margin: 0 10px;
         }
         
-        /* Mobil Uyum */
+        /* ----------------------------------- */
+        /* MOBİL UYUM */
+        /* ----------------------------------- */
         @media(max-width: 768px) {
             header li { display: none; }
             header nav { float: none; text-align: center; }
@@ -146,12 +201,12 @@
     <header>
         <div class="container">
             <div id="branding">
-                <h1><a href="fitlife.html">FitLife</a></h1>
+                <h1><a href="index.html">FitLife</a></h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="fitlife.html">Ana Sayfa</a></li>
-                    <li><a href="fitlife.html#iletisim">İletişim</a></li>
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="index.html#iletisim">İletişim</a></li>
                 </ul>
             </nav>
         </div>
@@ -167,19 +222,19 @@
             <div class="day-plan">
                 <h3><i class="fas fa-calendar-alt"></i> 1. Gün: Yüksek Yoğunluklu Koşu (HIIT)</h3>
                 <ul class="exercise-list">
-                    <li><img src="https://picsum.photos/id/24/50/50" alt="Koşu"><i class="fas fa-angle-right"></i> **Isınma:** 5 dakika hafif koşu.</li>
-                    <li><img src="https://picsum.photos/id/26/50/50" alt="Depar"><i class="fas fa-angle-right"></i> **HIIT Döngüsü:** 30 saniye depar (maksimum hız), 60 saniye yavaş tempo (aktif dinlenme). (8-10 tur)</li>
-                    <li><img src="https://picsum.photos/id/28/50/50" alt="Esneklik"><i class="fas fa-angle-right"></i> **Soğuma:** 5 dakika esneme.</li>
+                    <li><img src="https://picsum.photos/id/24/60/60" alt="Koşu"><i class="fas fa-angle-right"></i> **Isınma:** 5 dakika hafif koşu.</li>
+                    <li><img src="https://picsum.photos/id/26/60/60" alt="Depar"><i class="fas fa-angle-right"></i> **HIIT Döngüsü:** 30 saniye depar (maksimum hız), 60 saniye yavaş tempo (aktif dinlenme). (8-10 tur)</li>
+                    <li><img src="https://picsum.photos/id/28/60/60" alt="Esneklik"><i class="fas fa-angle-right"></i> **Soğuma:** 5 dakika esneme.</li>
                 </ul>
             </div>
             
             <div class="day-plan">
                 <h3><i class="fas fa-calendar-alt"></i> 2. Gün: Vücut Ağırlığı Devre Antrenmanı</h3>
                 <ul class="exercise-list">
-                    <li><img src="https://picsum.photos/id/30/50/50" alt="Jumping Jacks"><i class="fas fa-angle-right"></i> **Jumping Jacks (Kelebek Zıplaması):** 45 saniye.</li>
-                    <li><img src="https://picsum.photos/id/32/50/50" alt="Squat Jumps"><i class="fas fa-angle-right"></i> **Squat Jumps (Zıplamalı Çömelme):** 45 saniye.</li>
-                    <li><img src="https://picsum.photos/id/34/50/50" alt="Burpee"><i class="fas fa-angle-right"></i> **Burpee:** 45 saniye.</li>
-                    <li><img src="https://picsum.photos/id/36/50/50" alt="Mountain Climber"><i class="fas fa-angle-right"></i> **Mountain Climber (Dağcı Tırmanışı):** 45 saniye.</li>
+                    <li><img src="https://picsum.photos/id/30/60/60" alt="Jumping Jacks"><i class="fas fa-angle-right"></i> **Jumping Jacks (Kelebek Zıplaması):** 45 saniye.</li>
+                    <li><img src="https://picsum.photos/id/32/60/60" alt="Squat Jumps"><i class="fas fa-angle-right"></i> **Squat Jumps (Zıplamalı Çömelme):** 45 saniye.</li>
+                    <li><img src="https://picsum.photos/id/34/60/60" alt="Burpee"><i class="fas fa-angle-right"></i> **Burpee:** 45 saniye.</li>
+                    <li><img src="https://picsum.photos/id/36/60/60" alt="Mountain Climber"><i class="fas fa-angle-right"></i> **Mountain Climber (Dağcı Tırmanışı):** 45 saniye.</li>
                     <li><i class="fas fa-angle-right"></i>**Dinlenme:** Her tur arasında 60 saniye dinlenerek 4 tur tamamlayın.</li>
                 </ul>
             </div>
@@ -188,7 +243,7 @@
                 <h3><i class="fas fa-calendar-alt"></i> 3. Gün: Stabil Kardiyo</h3>
                 <p>Hafif ile orta tempoda, kalp atış hızınızı sabit tutarak yapılan uzun süreli antrenmandır.</p>
                 <ul class="exercise-list">
-                    <li><img src="https://picsum.photos/id/38/50/50" alt="Bisiklet"><i class="fas fa-angle-right"></i> **Bisiklet / Koşu Bandı / Eliptik:** 45 - 60 dakika.</li>
+                    <li><img src="https://picsum.photos/id/38/60/60" alt="Bisiklet"><i class="fas fa-angle-right"></i> **Bisiklet / Koşu Bandı / Eliptik:** 45 - 60 dakika.</li>
                     <li><i class="fas fa-angle-right"></i> **Tempo:** Konuşabilecek kadar rahat, ancak terlemeye başlayacak kadar hızlı tempo.</li>
                 </ul>
             </div>
@@ -196,9 +251,9 @@
             <div class="day-plan">
                 <h3><i class="fas fa-calendar-alt"></i> 4. Gün: Tam Vücut Güç & Dayanıklılık</h3>
                 <ul class="exercise-list">
-                    <li><img src="https://picsum.photos/id/40/50/50" alt="Kettlebell Swing"><i class="fas fa-angle-right"></i> **Kettlebell Swing:** 3 set x 15 tekrar.</li>
-                    <li><img src="https://picsum.photos/id/42/50/50" alt="Dumbbell Thruster"><i class="fas fa-></i> **Dumbbell Thruster:** 3 set x 12 tekrar.</li>
-                    <li><img src="https://picsum.photos/id/44/50/50" alt="Plank"><i class="fas fa-angle-right"></i> **Plank:** 3 set (maksimum süre).</li>
+                    <li><img src="https://picsum.photos/id/40/60/60" alt="Kettlebell Swing"><i class="fas fa-angle-right"></i> **Kettlebell Swing:** 3 set x 15 tekrar.</li>
+                    <li><img src="https://picsum.photos/id/42/60/60" alt="Dumbbell Thruster"><i class="fas fa-angle-right"></i> **Dumbbell Thruster:** 3 set x 12 tekrar.</li>
+                    <li><img src="https://picsum.photos/id/44/60/60" alt="Plank"><i class="fas fa-angle-right"></i> **Plank:** 3 set (maksimum süre).</li>
                 </ul>
             </div>
             
@@ -208,7 +263,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır. | <a href="fitlife.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
+            <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
         </div>
     </footer>
 
