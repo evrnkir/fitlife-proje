@@ -75,10 +75,20 @@
             display: inline-block;
             padding: 0 10px; 
         }
+        
+        /* Hamburger Menü Butonu (Sadece mobilde göster) */
+        .menu-toggle {
+            display: none; 
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            padding: 5px 0;
+            cursor: pointer;
+        }
 
-        /* ----------------------------------- */
         /* QUIZ ALANI STİLLERİ (ETKİLEŞİMLİ) */
-        /* ----------------------------------- */
         #quiz-section {
             background: white;
             border-radius: 10px;
@@ -146,10 +156,6 @@
             border-color: var(--primary-color);
         }
         
-        .answer-btn:active {
-            transform: scale(0.98);
-        }
-
         /* Sonuç Ekranı */
         #result-screen {
             display: none;
@@ -187,9 +193,7 @@
             border-color: #0056b3;
         }
         
-        /* ----------------------------------- */
         /* FOOTER */
-        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
@@ -209,11 +213,86 @@
             color: var(--primary-color);
         }
         
-        /* Responsive Ayarlar */
+        /* ----------------------------------- */
+        /* RESPONSIVE AYARLAR (GÜNCELLENDİ) */
+        /* ----------------------------------- */
         @media(max-width: 768px) {
-            header li { display: block; padding: 5px 0; }
-            header nav { float: none; text-align: center; }
-            header h1 { float: none; text-align: center; }
+            
+            /* Header Düzeni */
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Marka Adı */
+            header h1 {
+                font-size: 1.5em;
+                float: none;
+                margin: 0;
+                padding: 5px 0;
+            }
+            
+            /* Hamburger Butonunu Göster */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Navigasyon Gizle/Aç */
+            header nav {
+                float: none;
+                width: 100%;
+                max-height: 0; 
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out; 
+            }
+            
+            header nav.active {
+                max-height: 300px; 
+                padding-bottom: 10px;
+            }
+
+            /* Navigasyon Linklerini Dikey Yap */
+            header ul {
+                display: block;
+                float: none;
+                margin-top: 10px;
+                text-align: left;
+            }
+
+            header li {
+                display: block;
+                padding: 10px 0; 
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Mobil Butonlar */
+            header li:last-child {
+                margin-top: 10px;
+                border: none;
+            }
+
+            .btn {
+                width: 90%;
+                display: block;
+                text-align: center;
+                margin: 5px auto;
+            }
+            
+            /* Diğer Bölüm Optimizasyonları */
+            #quiz-section {
+                padding: 20px;
+            }
+            #quiz-section h2 {
+                font-size: 1.8em;
+            }
+            #question-card h3 {
+                font-size: 1.3em;
+            }
+            .answer-btn {
+                padding: 12px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -226,7 +305,12 @@
                     <h1>FITLIFE</h1>
                 </a>
             </div>
-            <nav>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Menü Aç/Kapa">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="main-nav">
                 <ul>
                     <li><a href="index.html#programlar">Programlar</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
@@ -279,12 +363,13 @@
         // Dinamik Yıl Güncellemesi
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // ------------------------------------
-        // QUIZ YAPISI VE MANTIĞI
-        // ------------------------------------
+        // MOBİL HAMBURGER MENÜ TOGGLE
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        });
 
-        // Sorular ve Puanlama
-        // Puanlama: +1 = Güç/Kas (5x5), -1 = Kardiyo/Dayanıklılık
+        // QUIZ YAPISI VE MANTIĞI
         const questions = [
             {
                 text: "Temel fitness hedefiniz nedir?",
@@ -322,7 +407,6 @@
         const questionText = document.getElementById('question-text');
         const answerOptionsDiv = document.getElementById('answer-options');
         const progressFill = document.getElementById('progress-fill');
-        const quizContent = document.getElementById('quiz-content');
         const questionCard = document.getElementById('question-card');
         const resultScreen = document.getElementById('result-screen');
         const resultTitle = document.getElementById('result-title');
@@ -337,9 +421,8 @@
 
             const currentQuestion = questions[currentQuestionIndex];
             questionText.textContent = currentQuestion.text;
-            answerOptionsDiv.innerHTML = ''; // Önceki butonları temizle
+            answerOptionsDiv.innerHTML = ''; 
 
-            // Cevap butonlarını dinamik olarak oluştur
             currentQuestion.options.forEach(option => {
                 const button = document.createElement('button');
                 button.textContent = option.text;
@@ -348,7 +431,6 @@
                 answerOptionsDiv.appendChild(button);
             });
 
-            // İlerleme çubuğunu güncelle
             updateProgressBar();
         }
 
@@ -360,28 +442,23 @@
         function handleAnswer(score) {
             totalScore += score;
             currentQuestionIndex++;
-            loadQuestion(); // Bir sonraki soruya geç
+            loadQuestion(); 
         }
 
         function showResult() {
-            // Son ilerleme çubuğu güncellemesi
             progressFill.style.width = '100%'; 
-
             questionCard.style.display = 'none';
             resultScreen.style.display = 'block';
 
             let recommendedProgram = {};
 
-            // Eğer sonuç 0 veya pozitifse: Güç Programı (5x5) öner
             if (totalScore >= 0) { 
                 recommendedProgram = {
                     title: "Harika! Size En Uygun Program: GÜÇ ve KAS İNŞASI (5x5)",
                     description: "Test sonuçlarınıza göre, hedefiniz maksimum güç artışı ve kas kütlesi inşa etmek. 5x5 sistemimiz, temel bileşik hareketlere odaklanarak bu amaca ulaşmanızı sağlayacaktır.",
                     link: "5x5-program.html"
                 };
-            } 
-            // Eğer sonuç negatifse: Kardiyo Programı öner
-            else { 
+            } else { 
                 recommendedProgram = {
                     title: "Mükemmel! Size En Uygun Program: YAĞ YAKIMI ve KONDİSYON",
                     description: "Test sonuçlarınıza göre, önceliğiniz dayanıklılığı artırmak ve yüksek kalori yakmak. Dinamik Kardiyo programımız, kondisyon seviyenizi hızla yükseltirken yağ yakımını maksimize edecektir.",
@@ -389,13 +466,11 @@
                 };
             }
 
-            // Sonuç ekranını doldur
             resultTitle.textContent = recommendedProgram.title;
             resultDescription.textContent = recommendedProgram.description;
             resultLink.href = recommendedProgram.link;
         }
 
-        // Quiz'i Başlat
         document.addEventListener('DOMContentLoaded', () => {
             loadQuestion();
         });

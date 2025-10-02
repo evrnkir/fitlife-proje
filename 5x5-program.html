@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitLife | Güç ve Kas İnşası (5x5) Programı</title>
+    <title>FitLife | Güç ve Kas İnşası Programı (5x5)</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -16,7 +16,6 @@
             --secondary-color: #28a745; 
             --dark-bg: #212529; 
             --light-bg: #f8f9fa; 
-            --accent-color: #ffc107; 
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -41,12 +40,12 @@
         }
 
         /* ----------------------------------- */
-        /* BAŞLIK VE NAVİGASYON (KOMPAKT STICKY) - GÜNCELLENDİ */
+        /* BAŞLIK VE NAVİGASYON (KOMPAKT STICKY) */
         /* ----------------------------------- */
         header {
             background: var(--dark-bg);
             color: white;
-            padding: 8px 0; /* KOMPAKT */
+            padding: 8px 0; 
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             position: sticky; 
@@ -63,7 +62,7 @@
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.9em; /* KOMPAKT */
+            font-size: 0.9em; 
             transition: color 0.3s;
         }
         
@@ -73,7 +72,7 @@
         }
         
         header h1 a {
-             font-size: 1.4em; /* KOMPAKT */
+             font-size: 1.4em; 
         }
 
         header ul {
@@ -87,68 +86,17 @@
             display: inline-block;
             padding: 0 10px; 
         }
-
-        /* ----------------------------------- */
-        /* PROGRAM SAYFASI İÇERİK STİLLERİ */
-        /* ----------------------------------- */
-        #program-details {
-            background: white;
-            text-align: left;
-        }
-
-        #program-details h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--light-bg);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
         
-        #program-details h3 {
-            color: var(--secondary-color);
-            margin-top: 30px;
-        }
-
-        .program-feature {
-            background: var(--light-bg);
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border-left: 4px solid var(--secondary-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .program-feature i {
-            color: var(--secondary-color);
-            margin-right: 10px;
-        }
-        
-        .program-schedule {
-            margin-top: 40px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            background-color: #fff;
-        }
-
-        .program-schedule ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .program-schedule li {
-            padding: 10px 0;
-            border-bottom: 1px dashed #eee;
-        }
-        
-        .program-schedule li:last-child {
-            border-bottom: none;
-        }
-        
-        .btn-call-to-action {
-            display: block;
-            margin-top: 40px;
-            text-align: center;
+        /* Hamburger Menü Butonu (Sadece mobilde göster) */
+        .menu-toggle {
+            display: none; 
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            padding: 5px 0;
+            cursor: pointer;
         }
         
         .btn {
@@ -173,9 +121,59 @@
             border-color: #0056b3;
         }
         
-        /* ----------------------------------- */
+        /* PROGRAM DETAY STİLLERİ */
+        #program-details {
+            background: white;
+            text-align: left;
+        }
+
+        #program-details h2 {
+            color: var(--primary-color); 
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        
+        #program-details h3 {
+            color: var(--dark-bg);
+            margin-top: 30px;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+        }
+        
+        .move-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .move-table th, .move-table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .move-table th {
+            background-color: var(--dark-bg);
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        
+        .move-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .btn-call-to-action {
+            display: block;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
         /* FOOTER */
-        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
@@ -195,11 +193,110 @@
             color: var(--primary-color);
         }
         
-        /* Responsive Ayarlar */
+        /* ----------------------------------- */
+        /* RESPONSIVE AYARLAR (GÜNCELLENDİ) */
+        /* ----------------------------------- */
         @media(max-width: 768px) {
-            header li { display: block; padding: 5px 0; }
-            header nav { float: none; text-align: center; }
-            header h1 { float: none; text-align: center; }
+            
+            /* Header Düzeni */
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Marka Adı */
+            header h1 {
+                font-size: 1.5em;
+                float: none;
+                margin: 0;
+                padding: 5px 0;
+            }
+            
+            /* Hamburger Butonunu Göster */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Navigasyon Gizle/Aç */
+            header nav {
+                float: none;
+                width: 100%;
+                max-height: 0; 
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out; 
+            }
+            
+            header nav.active {
+                max-height: 300px; 
+                padding-bottom: 10px;
+            }
+
+            /* Navigasyon Linklerini Dikey Yap */
+            header ul {
+                display: block;
+                float: none;
+                margin-top: 10px;
+                text-align: left;
+            }
+
+            header li {
+                display: block;
+                padding: 10px 0; 
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Mobil Butonlar */
+            header li:last-child {
+                margin-top: 10px;
+                border: none;
+            }
+
+            .btn {
+                width: 90%;
+                display: block;
+                text-align: center;
+                margin: 5px auto;
+            }
+            
+            /* Diğer Bölüm Optimizasyonları */
+            #program-details h2 {
+                font-size: 2em;
+            }
+            /* Tablonun mobil görünümü */
+            .move-table, .move-table tbody, .move-table td, .move-table th, .move-table tr {
+                display: block;
+            }
+
+            .move-table thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .move-table tr {
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+                border-radius: 5px;
+            }
+            
+            .move-table td {
+                border: none;
+                position: relative;
+                padding-left: 50%; 
+                text-align: right;
+            }
+            
+            .move-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 45%;
+                padding-left: 15px;
+                font-weight: bold;
+                text-align: left;
+                color: var(--primary-color);
+            }
         }
     </style>
 </head>
@@ -212,7 +309,12 @@
                     <h1>FITLIFE</h1>
                 </a>
             </div>
-            <nav>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Menü Aç/Kapa">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="main-nav">
                 <ul>
                     <li><a href="index.html#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
@@ -225,40 +327,69 @@
 
     <section id="program-details" class="section-padding">
         <div class="container">
-            <h2><i class="fas fa-dumbbell"></i> Güç ve Kas İnşası (5x5 Sistemi)</h2>
+            <h2><i class="fas fa-dumbbell"></i> Güç ve Kas İnşası Programı (5x5)</h2>
             
-            <p>5x5 sistemi, temel bileşik hareketlere odaklanarak kısa sürede maksimum güç artışı ve sağlam bir kas kütlesi inşa etmenizi sağlar. Basit, kanıtlanmış ve etkili bir yaklaşımdır.</p>
+            <p style="text-align: center; font-size: 1.1em;">5x5 (5 set x 5 tekrar) sistemi, maksimum güç artışı için kanıtlanmış bir yöntemdir. Temel hedefiniz kuvvet ve kas kütlesi kazanmaksa, bu program tam size göre.</p>
 
-            <h3>Programın Ana Özellikleri</h3>
-            <div class="program-feature">
-                <i class="fas fa-weight-hanging"></i> **Bileşik Hareket Odaklı:** Squat, Bench Press, Deadlift gibi temel hareketler.
-            </div>
-            <div class="program-feature">
-                <i class="fas fa-chart-line"></i> **İlerleyici Aşırı Yükleme:** Her antrenmanda ağırlık artışıyla sürekli gelişim.
-            </div>
-            <div class="program-feature">
-                <i class="fas fa-calendar-alt"></i> **Haftada 3 Gün:** Kasların toparlanması için yeterli dinlenme süresi.
-            </div>
+            <h3>Programın Temel Faydaları</h3>
+            <ul>
+                <li>Maksimum bileşik hareket gücü (Squat, Bench, Deadlift) artışı.</li>
+                <li>Hızlı kas kütlesi (hipertrofi) kazanımı.</li>
+                <li>Antrenman süresini optimize etme (Haftada 3 gün).</li>
+                <li>Başlangıç ve orta seviye için ideal bir temel oluşturma.</li>
+            </ul>
+            
+            <h3>Program Yapısı (Haftalık Örnek)</h3>
+            <p>Program, haftada üç tam vücut antrenmanından oluşur. Her seansta ağır bileşik hareketlere odaklanılır.</p>
 
-            <h3>Örnek Haftalık Program Akışı (3 Gün)</h3>
-            <div class="program-schedule">
-                <ul>
-                    <li><i class="far fa-calendar-check"></i> **Pazartesi (A Antrenmanı):** Squat (5x5), Bench Press (5x5), Barbell Row (5x5).</li>
-                    <li><i class="far fa-calendar-check"></i> **Çarşamba (B Antrenmanı):** Squat (5x5), Overhead Press (5x5), Deadlift (1x5).</li>
-                    <li><i class="far fa-calendar-check"></i> **Cuma (A Antrenmanı Tekrarı):** Squat (5x5), Bench Press (5x5), Barbell Row (5x5).</li>
-                    <li><i class="far fa-calendar-check"></i> **Hafta Sonu:** Aktif Dinlenme ve Toparlanma.</li>
-                </ul>
-            </div>
+            <table class="move-table">
+                <thead>
+                    <tr>
+                        <th>Gün</th>
+                        <th>Antrenman A</th>
+                        <th>Antrenman B</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Gün">**Pazartesi**</td>
+                        <td data-label="Antrenman A">Squat (5x5), Bench Press (5x5), Barbell Row (5x5)</td>
+                        <td data-label="Antrenman B">-</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Gün">**Salı**</td>
+                        <td data-label="Antrenman A" colspan="2" style="text-align: center;">Dinlenme / Kardiyo</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Gün">**Çarşamba**</td>
+                        <td data-label="Antrenman A">-</td>
+                        <td data-label="Antrenman B">Squat (5x5), Overhead Press (5x5), Deadlift (1x5)</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Gün">**Perşembe**</td>
+                        <td data-label="Antrenman A" colspan="2" style="text-align: center;">Dinlenme / Esneklik</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Gün">**Cuma**</td>
+                        <td data-label="Antrenman A">Squat (5x5), Bench Press (5x5), Barbell Row (5x5)</td>
+                        <td data-label="Antrenman B">-</td>
+                    </tr>
+                    <tr>
+                        <td data-label="Gün">**Hafta Sonu**</td>
+                        <td data-label="Antrenman A" colspan="2" style="text-align: center;">Aktif Dinlenme / Tam Dinlenme</td>
+                    </tr>
+                </tbody>
+            </table>
             
             <div class="btn-call-to-action">
-                <a href="iletisim.html" class="btn btn-primary">5x5 Programına Başla</a>
+                <a href="iletisim.html" class="btn btn-primary">5x5 Programına Kaydol!</a>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
+            <p>&copy; <span id="current-year">2025</span> FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -268,6 +399,9 @@
     </footer>
 
     <script>
+        // Dinamik Yıl Güncellemesi
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
         // Akıllı Header JavaScript Kodu
         let lastScrollY = 0;
         const header = document.querySelector('header');
@@ -281,16 +415,19 @@
 
             const currentScrollY = window.scrollY;
 
-            // Aşağı kaydırılıyor VE header başlangıç pozisyonundan ayrılmış
             if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
                 header.classList.add('header-hidden');
-            } 
-            // Yukarı kaydırılıyor VEYA sayfanın en üstüne yaklaşıldı
-            else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+            } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
                 header.classList.remove('header-hidden');
             }
             
             lastScrollY = currentScrollY;
+        });
+
+        // MOBİL HAMBURGER MENÜ TOGGLE
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
         });
     </script>
 </body>

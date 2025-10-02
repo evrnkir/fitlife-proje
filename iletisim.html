@@ -12,11 +12,11 @@
         /* GENEL AYARLAR VE RENKLER */
         /* ----------------------------------- */
         :root {
-            --primary-color: #007bff; /* Mavi */
-            --secondary-color: #28a745; /* Yeşil */
-            --dark-bg: #212529; /* Koyu */
-            --light-bg: #f8f9fa; /* Açık */
-            --error-color: #dc3545; /* Hata Kırmızı */
+            --primary-color: #007bff; 
+            --secondary-color: #28a745; 
+            --dark-bg: #212529; 
+            --light-bg: #f8f9fa; 
+            --error-color: #dc3545; 
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -31,7 +31,7 @@
 
         .container {
             width: 90%; 
-            max-width: 800px; /* İletişim formu için daha dar konteyner */
+            max-width: 800px; 
             margin: auto;
             overflow: hidden;
         }
@@ -88,6 +88,18 @@
             padding: 0 10px; 
         }
         
+        /* Hamburger Menü Butonu (Sadece mobilde göster) */
+        .menu-toggle {
+            display: none; 
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+        
         .btn {
             display: inline-block;
             padding: 12px 25px;
@@ -111,20 +123,11 @@
             border-color: #0056b3;
         }
 
-        /* ----------------------------------- */
         /* İLETİŞİM FORM STİLLERİ */
-        /* ----------------------------------- */
         #contact-section {
             background: white;
             border-radius: 10px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        #contact-section h2 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 2.5em;
         }
         
         .form-group {
@@ -149,12 +152,6 @@
             transition: border-color 0.3s;
         }
         
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-        
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
@@ -165,7 +162,7 @@
             color: var(--error-color);
             font-size: 0.9em;
             margin-top: 5px;
-            display: none; /* JS ile gösterilecek */
+            display: none; 
         }
         
         /* Başarı/Genel Mesaj Stili */
@@ -178,9 +175,7 @@
             display: none;
         }
 
-        /* ----------------------------------- */
         /* FOOTER */
-        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
@@ -200,11 +195,76 @@
             color: var(--primary-color);
         }
         
-        /* Responsive Ayarlar */
+        /* ----------------------------------- */
+        /* RESPONSIVE AYARLAR (GÜNCELLENDİ) */
+        /* ----------------------------------- */
         @media(max-width: 768px) {
-            header li { display: block; padding: 5px 0; }
-            header nav { float: none; text-align: center; }
-            header h1 { float: none; text-align: center; }
+            
+            /* Header Düzeni */
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Marka Adı */
+            header h1 {
+                font-size: 1.5em;
+                float: none;
+                margin: 0;
+                padding: 5px 0;
+            }
+            
+            /* Hamburger Butonunu Göster */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Navigasyon Gizle/Aç */
+            header nav {
+                float: none;
+                width: 100%;
+                max-height: 0; 
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out; 
+            }
+            
+            header nav.active {
+                max-height: 300px; 
+                padding-bottom: 10px;
+            }
+
+            /* Navigasyon Linklerini Dikey Yap */
+            header ul {
+                display: block;
+                float: none;
+                margin-top: 10px;
+                text-align: left;
+            }
+
+            header li {
+                display: block;
+                padding: 10px 0; 
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Mobil Butonlar */
+            header li:last-child {
+                margin-top: 10px;
+                border: none;
+            }
+
+            .btn {
+                width: 90%;
+                display: block;
+                text-align: center;
+                margin: 5px auto;
+            }
+            
+            /* Diğer Bölüm Optimizasyonları */
+            #contact-section h2 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
@@ -217,7 +277,12 @@
                     <h1>FITLIFE</h1>
                 </a>
             </div>
-            <nav>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Menü Aç/Kapa">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="main-nav">
                 <ul>
                     <li><a href="index.html#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
@@ -308,24 +373,25 @@
             lastScrollY = currentScrollY;
         });
 
+        // MOBİL HAMBURGER MENÜ TOGGLE
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        });
+
         // Form Doğrulama ve Gönderim Geri Bildirimi JavaScript'i
         const form = document.getElementById('contact-form');
         const submitBtn = document.getElementById('submit-btn');
         const statusMessage = document.getElementById('form-status-message');
 
-        // Form gönderimi Event Listener
         form.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Varsayılan HTML form gönderimini durdur
+            e.preventDefault(); 
             
-            // Hata mesajlarını sıfırla
             document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
             statusMessage.style.display = 'none';
-            statusMessage.style.backgroundColor = '';
-            statusMessage.style.color = '';
 
-            let isValid = true; // Doğrulama bayrağı
+            let isValid = true; 
 
-            // 1. Alanların Boş Olup Olmadığını Kontrol Etme
             const nameInput = document.getElementById('name');
             const emailInput = document.getElementById('email');
             const subjectInput = document.getElementById('subject');
@@ -346,7 +412,6 @@
                 isValid = false;
             }
 
-            // 2. E-posta Formatını Kontrol Etme
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(emailInput.value.trim())) {
                 document.getElementById('email-error').style.display = 'block';
@@ -355,20 +420,17 @@
 
             if (!isValid) {
                 statusMessage.textContent = 'Lütfen formdaki hataları düzeltin.';
-                statusMessage.style.backgroundColor = '#f8d7da'; // Kırmızımsı arka plan
-                statusMessage.style.color = var(--error-color); 
+                statusMessage.style.backgroundColor = '#f8d7da'; 
+                statusMessage.style.color = 'var(--error-color)'; 
                 statusMessage.style.display = 'block';
-                return; // Doğrulama başarısızsa gönderimi durdur
+                return; 
             }
 
-            // --- GÖNDERİM İŞLEMİ (Doğrulama Başarılı İse) ---
-            
-            // Buton durumunu değiştir
+            // GÖNDERİM İŞLEMİ
             submitBtn.textContent = 'GÖNDERİLİYOR...';
             submitBtn.disabled = true;
-            submitBtn.style.backgroundColor = '#6c757d'; // Gri ton
+            submitBtn.style.backgroundColor = '#6c757d'; 
             
-            // Formspree'ye Gönder
             try {
                 const response = await fetch(form.action, {
                     method: form.method,
@@ -380,26 +442,23 @@
 
                 if (response.ok) {
                     statusMessage.textContent = 'Mesajınız başarıyla gönderildi! Size en kısa sürede dönüş yapacağız.';
-                    statusMessage.style.backgroundColor = '#d4edda'; // Yeşilimsi arka plan
-                    statusMessage.style.color = var(--secondary-color);
-                    form.reset(); // Formu temizle
+                    statusMessage.style.backgroundColor = '#d4edda'; 
+                    statusMessage.style.color = 'var(--secondary-color)';
+                    form.reset(); 
                 } else {
-                    // Formspree'den gelen hata (örn: rate limit)
                     statusMessage.textContent = 'Mesajınız gönderilemedi. Lütfen daha sonra tekrar deneyin.';
                     statusMessage.style.backgroundColor = '#f8d7da'; 
-                    statusMessage.style.color = var(--error-color);
+                    statusMessage.style.color = 'var(--error-color)';
                 }
             } catch (error) {
-                // Ağ veya diğer hatalar
                 statusMessage.textContent = 'Bir hata oluştu. Lütfen internet bağlantınızı kontrol edin.';
                 statusMessage.style.backgroundColor = '#f8d7da'; 
-                statusMessage.style.color = var(--error-color);
+                statusMessage.style.color = 'var(--error-color)';
             } finally {
-                // Hata olsa da olmasa da butonu normale döndür
                 statusMessage.style.display = 'block';
                 submitBtn.textContent = 'MESAJI GÖNDER';
                 submitBtn.disabled = false;
-                submitBtn.style.backgroundColor = var(--primary-color);
+                submitBtn.style.backgroundColor = 'var(--primary-color)';
             }
         });
     </script>

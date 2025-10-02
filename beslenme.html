@@ -13,7 +13,7 @@
         /* ----------------------------------- */
         :root {
             --primary-color: #007bff; 
-            --secondary-color: #ffc107; /* Beslenme vurgusu için sarı/turuncu */
+            --secondary-color: #ffc107; 
             --dark-bg: #212529; 
             --light-bg: #f8f9fa; 
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -71,6 +71,10 @@
             float: left;
         }
         
+        header h1 a {
+             font-size: 1.4em; 
+        }
+
         header ul {
             padding: 0;
             list-style: none;
@@ -81,6 +85,18 @@
         header li {
             display: inline-block;
             padding: 0 10px; 
+        }
+        
+        /* Hamburger Menü Butonu (Sadece mobilde göster) */
+        .menu-toggle {
+            display: none; 
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            padding: 5px 0;
+            cursor: pointer;
         }
         
         .btn {
@@ -105,16 +121,14 @@
             border-color: #0056b3;
         }
         
-        /* ----------------------------------- */
         /* BESLENME VE FİLTRE STİLLERİ */
-        /* ----------------------------------- */
         #nutrition-section {
             background: white;
             text-align: center;
         }
 
         #nutrition-section h2 {
-            color: var(--secondary-color); /* Sarı/Turuncu vurgu */
+            color: var(--secondary-color); 
             margin-bottom: 40px;
             font-size: 2.5em;
         }
@@ -155,7 +169,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
             transition: opacity 0.4s ease-in-out;
             border-top: 4px solid var(--primary-color);
-            opacity: 1; /* Başlangıçta görünür */
+            opacity: 1; 
         }
         
         .content-card h3 {
@@ -165,15 +179,12 @@
             padding-bottom: 10px;
         }
         
-        /* Filtrelenmiş kartlar gizlenir */
         .content-card.hidden {
             display: none;
             opacity: 0;
         }
         
-        /* ----------------------------------- */
         /* FOOTER */
-        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
@@ -193,12 +204,83 @@
             color: var(--primary-color);
         }
         
-        /* Responsive Ayarlar */
+        /* ----------------------------------- */
+        /* RESPONSIVE AYARLAR (GÜNCELLENDİ) */
+        /* ----------------------------------- */
         @media(max-width: 768px) {
-            header li { display: block; padding: 5px 0; }
-            header nav { float: none; text-align: center; }
-            header h1 { float: none; text-align: center; }
-            .content-grid { grid-template-columns: 1fr; }
+            
+            /* Header Düzeni */
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Marka Adı */
+            header h1 {
+                font-size: 1.5em;
+                float: none;
+                margin: 0;
+                padding: 5px 0;
+            }
+            
+            /* Hamburger Butonunu Göster */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Navigasyon Gizle/Aç */
+            header nav {
+                float: none;
+                width: 100%;
+                max-height: 0; 
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out; 
+            }
+            
+            header nav.active {
+                max-height: 300px; 
+                padding-bottom: 10px;
+            }
+
+            /* Navigasyon Linklerini Dikey Yap */
+            header ul {
+                display: block;
+                float: none;
+                margin-top: 10px;
+                text-align: left;
+            }
+
+            header li {
+                display: block;
+                padding: 10px 0; 
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Mobil Butonlar */
+            header li:last-child {
+                margin-top: 10px;
+                border: none;
+            }
+
+            .btn {
+                width: 90%;
+                display: block;
+                text-align: center;
+                margin: 5px auto;
+            }
+            
+            /* Diğer Bölüm Optimizasyonları */
+            #nutrition-section h2 {
+                font-size: 2em;
+            }
+            .content-grid { 
+                grid-template-columns: 1fr; 
+            }
+            .filter-btn {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
         }
     </style>
 </head>
@@ -211,7 +293,12 @@
                     <h1>FITLIFE</h1>
                 </a>
             </div>
-            <nav>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Menü Aç/Kapa">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="main-nav">
                 <ul>
                     <li><a href="index.html#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
@@ -309,9 +396,13 @@
             lastScrollY = currentScrollY;
         });
 
-        // ------------------------------------
+        // MOBİL HAMBURGER MENÜ TOGGLE
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        });
+
         // ETKİLEŞİMLİ İÇERİK FİLTRESİ
-        // ------------------------------------
         document.addEventListener('DOMContentLoaded', () => {
             const filterButtons = document.querySelectorAll('.filter-btn');
             const contentCards = document.querySelectorAll('.content-card');
@@ -319,34 +410,27 @@
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     
-                    // Aktif butonu belirle
                     filterButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
 
                     const filter = button.getAttribute('data-filter');
 
-                    // İçerikleri filtrele
                     contentCards.forEach(card => {
-                        // Tüm kartları varsayılan olarak gizle
                         card.classList.add('hidden');
                         card.style.display = 'none';
 
-                        // Eğer filtre 'all' ise veya kartın sınıfı filtreye uyuyorsa göster
                         if (filter === 'all' || card.classList.contains(filter)) {
-                            // setTimeout kullanarak geçişi (transition) daha yumuşak yap
                             setTimeout(() => {
                                 card.style.display = 'block';
                                 setTimeout(() => {
                                     card.classList.remove('hidden');
-                                }, 10); // Display block sonrası opacity için kısa bekleme
-                            }, 50); // Genel geçiş gecikmesi
+                                }, 10); 
+                            }, 50); 
                         }
                     });
                 });
             });
             
-            // Sayfa yüklendiğinde varsayılan olarak "Tüm Tüyolar" gösterilir.
-            // Bu, 'all' filtresini tetikler.
             document.querySelector('.filter-btn[data-filter="all"]').click();
         });
 

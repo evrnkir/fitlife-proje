@@ -31,7 +31,7 @@
 
         .container {
             width: 90%; 
-            max-width: 1200px;
+            max-width: 900px;
             margin: auto;
             overflow: hidden;
         }
@@ -46,7 +46,7 @@
         header {
             background: var(--dark-bg);
             color: white;
-            padding: 8px 0; /* KOMPAKT */
+            padding: 8px 0; 
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             position: sticky; 
@@ -63,7 +63,7 @@
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.9em; /* KOMPAKT */
+            font-size: 0.9em; 
             transition: color 0.3s;
         }
         
@@ -73,7 +73,7 @@
         }
         
         header h1 a {
-             font-size: 1.4em; /* KOMPAKT */
+             font-size: 1.4em; 
         }
 
         header ul {
@@ -86,6 +86,18 @@
         header li {
             display: inline-block;
             padding: 0 10px; 
+        }
+        
+        /* Hamburger Menü Butonu (Sadece mobilde göster) */
+        .menu-toggle {
+            display: none; 
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            padding: 5px 0;
+            cursor: pointer;
         }
         
         .btn {
@@ -109,37 +121,36 @@
             background-color: #0056b3;
             border-color: #0056b3;
         }
-
+        
         /* ----------------------------------- */
-        /* SSS AKORDİYON STİLLERİ (ETKİLEŞİMLİ KISIM) */
+        /* AKORDİYON (SSS) STİLLERİ */
         /* ----------------------------------- */
         #faq-section {
             background: white;
-            padding: 40px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
         
         #faq-section h2 {
-            text-align: center;
-            color: var(--dark-bg);
+            color: var(--primary-color);
             margin-bottom: 40px;
             font-size: 2.5em;
         }
         
-        .accordion-item {
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-            transition: box-shadow 0.3s;
+        .accordion {
+            text-align: left;
         }
         
-        .accordion-item:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        .accordion-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
         }
 
         .accordion-header {
             background-color: var(--light-bg);
-            color: var(--dark-bg);
             padding: 18px 25px;
             cursor: pointer;
             display: flex;
@@ -147,43 +158,46 @@
             align-items: center;
             font-weight: bold;
             font-size: 1.1em;
+            color: var(--dark-bg);
             transition: background-color 0.3s;
-            border-bottom: 1px solid #ddd;
         }
-        
+
         .accordion-header:hover {
-            background-color: #f0f0f0;
+            background-color: #ececec;
         }
-        
+
         .accordion-header i {
-            transition: transform 0.3s;
+            font-size: 1.2em;
             color: var(--primary-color);
-        }
-        
-        /* Açık olduğunda ok yukarı döner */
-        .accordion-header.active i {
-            transform: rotate(180deg);
-            color: var(--secondary-color);
+            transition: transform 0.3s;
         }
 
         .accordion-content {
             padding: 0 25px;
-            background-color: white;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            font-size: 1em;
-        }
-
-        /* Açık content padding'i */
-        .accordion-header.active + .accordion-content {
-            padding: 15px 25px 20px 25px;
-            max-height: 300px; /* Cevabın boyutuna göre ayarlanabilir */
+            transition: max-height 0.4s ease-out;
+            background-color: white;
         }
         
-        /* ----------------------------------- */
+        .accordion-content p {
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            margin: 0;
+        }
+
+        /* Akordiyon Açıkken Başlık ve İkon Stili */
+        .accordion-item.active .accordion-header {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .accordion-item.active .accordion-header i {
+            color: white;
+            transform: rotate(180deg);
+        }
+        
         /* FOOTER */
-        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
@@ -202,12 +216,80 @@
         footer .social-links a:hover {
             color: var(--primary-color);
         }
-        
-        /* Responsive Ayarlar */
+
+        /* ----------------------------------- */
+        /* RESPONSIVE AYARLAR (GÜNCELLENDİ) */
+        /* ----------------------------------- */
         @media(max-width: 768px) {
-            header li { display: block; padding: 5px 0; }
-            header nav { float: none; text-align: center; }
-            header h1 { float: none; text-align: center; }
+            
+            /* Header Düzeni */
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Marka Adı */
+            header h1 {
+                font-size: 1.5em;
+                float: none;
+                margin: 0;
+                padding: 5px 0;
+            }
+            
+            /* Hamburger Butonunu Göster */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Navigasyon Gizle/Aç */
+            header nav {
+                float: none;
+                width: 100%;
+                max-height: 0; /* Başlangıçta gizli */
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out; 
+            }
+            
+            header nav.active {
+                max-height: 300px; /* Açıkken yüksekliği ayarla */
+                padding-bottom: 10px;
+            }
+
+            /* Navigasyon Linklerini Dikey Yap */
+            header ul {
+                display: block;
+                float: none;
+                margin-top: 10px;
+                text-align: left;
+            }
+
+            header li {
+                display: block;
+                padding: 10px 0; 
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Mobil Butonlar */
+            header li:last-child {
+                margin-top: 10px;
+                border: none;
+            }
+
+            .btn {
+                width: 90%;
+                display: block;
+                text-align: center;
+                margin: 5px auto;
+            }
+            
+            /* Diğer Bölüm Optimizasyonları */
+            #faq-section h2 {
+                font-size: 2em;
+            }
+            .accordion-header {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -220,7 +302,12 @@
                     <h1>FITLIFE</h1>
                 </a>
             </div>
-            <nav>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Menü Aç/Kapa">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="main-nav">
                 <ul>
                     <li><a href="index.html#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
@@ -235,44 +322,48 @@
         <div class="container">
             <h2><i class="fas fa-question-circle"></i> Sıkça Sorulan Sorular</h2>
             
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    Programlar kimler için uygundur?
-                    <i class="fas fa-chevron-down"></i>
+            <div class="accordion">
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Programlar ne kadar sürer?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Temel programlarımızın süresi 4 ile 12 hafta arasında değişmektedir. Bu süreler, hedeflerinize ve ilerleme hızınıza göre kişiselleştirilebilir.</p>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>FitLife programları, fitness yolculuğuna yeni başlayanlardan ileri seviye sporculara kadar herkes için uygun esnekliğe sahiptir. Her programın başlangıcında seviyenize göre ayarlamalar için detaylı talimatlar sunulmaktadır.</p>
-                </div>
-            </div>
 
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    Antrenmanlara başlamadan önce özel bir ekipmana ihtiyacım var mı?
-                    <i class="fas fa-chevron-down"></i>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Başlangıç seviyesinde miyim?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Programlarımız her seviyeye uygundur. Özellikle 5x5 ve Kardiyo programlarımızın başlangıç seviyeleri, yeni başlayanlar için idealdir. Size hangi programın uygun olduğunu bulmak için ana sayfadaki **QUIZ'i** çözebilirsiniz!</p>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>5x5 Güç Programı için bir spor salonuna erişim veya temel serbest ağırlık ekipmanları (halter, dambıl) gereklidir. Kardiyo ve Esneklik programlarımız ise, ihtiyaca göre sadece vücut ağırlığı veya hafif ekipmanlarla (mat, direnç bandı) evde uygulanabilir seçenekler sunar.</p>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Beslenme programı da dahil mi?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Evet, tüm FitLife programları, hedeflerinize uygun genel beslenme rehberleri ve tüyolar içerir. Detaylı bilgilere **Beslenme** sayfamızdan ulaşabilirsiniz.</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    Beslenme tüyolarınız kişiselleştirilmiş mi?
-                    <i class="fas fa-chevron-down"></i>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Egzersizleri evde yapabilir miyim?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Kardiyo ve Esneklik programlarımızın büyük bir kısmı minimum ekipmanla evde yapılabilir. Güç (5x5) programı ise temel spor salonu ekipmanları (halter, dambıl) gerektirir.</p>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>Web sitemizdeki Beslenme bölümü, genel bilimsel beslenme ilkeleri ve sağlıklı tarifler sunar. Kişisel sağlık durumunuzu ve hedeflerinizi dikkate alan, tamamen size özel bir beslenme planı için ise iletişim sayfamızdan bir uzmandan randevu almanız tavsiye edilir.</p>
-                </div>
-            </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header">
-                    Sakatlanırsam ne yapmalıyım?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <p>Herhangi bir sakatlık durumunda programı derhal durdurun ve bir tıp uzmanına danışın. Programlarımız bir doktorun veya fizyoterapistin yerini alamaz. İyileşme süreciniz tamamlanana kadar Esneklik ve Mobilite programımızdaki hafif hareketlere odaklanabilirsiniz.</p>
-                </div>
+
             </div>
             
         </div>
@@ -280,7 +371,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
+            <p>&copy; <span id="current-year">2025</span> FitLife. Tüm Hakları Saklıdır. | <a href="index.html" style="color: white; text-decoration: underline;">Ana Sayfaya Dön</a></p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -290,7 +381,10 @@
     </footer>
 
     <script>
-        // Akıllı Header JavaScript Kodu (Header'ı küçültmek için)
+        // Dinamik Yıl Güncellemesi
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Akıllı Header JavaScript Kodu
         let lastScrollY = 0;
         const header = document.querySelector('header');
         let headerHeight = 0;
@@ -312,29 +406,38 @@
             lastScrollY = currentScrollY;
         });
 
-        // SSS Akordiyon JavaScript Kodu (Etkileşimli Kısım)
-        document.addEventListener('DOMContentLoaded', () => {
-            const headers = document.querySelectorAll('.accordion-header');
+        // MOBİL HAMBURGER MENÜ TOGGLE
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        });
 
-            headers.forEach(header => {
-                header.addEventListener('click', () => {
-                    // Tıklanan header'ın aktif (açık) durumunu değiştir
-                    header.classList.toggle('active');
-                    
-                    // Cevap içeriğini al
-                    const content = header.nextElementSibling;
+        // Akordiyon (SSS) Fonksiyonu
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.closest('.accordion-item');
+                const content = item.querySelector('.accordion-content');
+                const isActive = item.classList.contains('active');
 
-                    // İçeriği açma/kapama mantığı
-                    if (header.classList.contains('active')) {
-                        // Aç: max-height'i içeriğin gerçek yüksekliğine ayarla
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    } else {
-                        // Kapa
-                        content.style.maxHeight = "0";
+                // Tüm akordiyonları kapat
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.accordion-content').style.maxHeight = null;
                     }
                 });
+
+                // Tıklanan akordiyonu aç/kapat
+                if (isActive) {
+                    item.classList.remove('active');
+                    content.style.maxHeight = null;
+                } else {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
             });
         });
     </script>
+
 </body>
 </html>

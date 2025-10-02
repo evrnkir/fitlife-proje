@@ -13,7 +13,7 @@
         /* ----------------------------------- */
         :root {
             --primary-color: #007bff; 
-            --secondary-color: #28a745; /* Esneklik vurgusu için yeşil */
+            --secondary-color: #28a745; 
             --dark-bg: #212529; 
             --light-bg: #f8f9fa; 
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -45,7 +45,7 @@
         header {
             background: var(--dark-bg);
             color: white;
-            padding: 8px 0; /* KOMPAKT */
+            padding: 8px 0; 
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             position: sticky; 
@@ -62,7 +62,7 @@
             color: white;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.9em; /* KOMPAKT */
+            font-size: 0.9em; 
             transition: color 0.3s;
         }
         
@@ -72,7 +72,7 @@
         }
         
         header h1 a {
-             font-size: 1.4em; /* KOMPAKT */
+             font-size: 1.4em; 
         }
 
         header ul {
@@ -85,6 +85,18 @@
         header li {
             display: inline-block;
             padding: 0 10px; 
+        }
+        
+        /* Hamburger Menü Butonu (Sadece mobilde göster) */
+        .menu-toggle {
+            display: none; 
+            float: right;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            padding: 5px 0;
+            cursor: pointer;
         }
         
         .btn {
@@ -109,16 +121,14 @@
             border-color: #0056b3;
         }
         
-        /* ----------------------------------- */
         /* PROGRAM DETAY STİLLERİ */
-        /* ----------------------------------- */
         #program-details {
             background: white;
             text-align: left;
         }
 
         #program-details h2 {
-            color: var(--secondary-color); /* Yeşil vurgu */
+            color: var(--secondary-color); 
             border-bottom: 2px solid var(--light-bg);
             padding-bottom: 15px;
             margin-bottom: 20px;
@@ -174,9 +184,7 @@
             text-align: center;
         }
         
-        /* ----------------------------------- */
         /* FOOTER */
-        /* ----------------------------------- */
         footer {
             background: var(--dark-bg);
             color: white;
@@ -196,11 +204,79 @@
             color: var(--primary-color);
         }
         
-        /* Responsive Ayarlar */
+        /* ----------------------------------- */
+        /* RESPONSIVE AYARLAR (GÜNCELLENDİ) */
+        /* ----------------------------------- */
         @media(max-width: 768px) {
-            header li { display: block; padding: 5px 0; }
-            header nav { float: none; text-align: center; }
-            header h1 { float: none; text-align: center; }
+            
+            /* Header Düzeni */
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Marka Adı */
+            header h1 {
+                font-size: 1.5em;
+                float: none;
+                margin: 0;
+                padding: 5px 0;
+            }
+            
+            /* Hamburger Butonunu Göster */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Navigasyon Gizle/Aç */
+            header nav {
+                float: none;
+                width: 100%;
+                max-height: 0; 
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out; 
+            }
+            
+            header nav.active {
+                max-height: 300px; 
+                padding-bottom: 10px;
+            }
+
+            /* Navigasyon Linklerini Dikey Yap */
+            header ul {
+                display: block;
+                float: none;
+                margin-top: 10px;
+                text-align: left;
+            }
+
+            header li {
+                display: block;
+                padding: 10px 0; 
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Mobil Butonlar */
+            header li:last-child {
+                margin-top: 10px;
+                border: none;
+            }
+
+            .btn {
+                width: 90%;
+                display: block;
+                text-align: center;
+                margin: 5px auto;
+            }
+            
+            /* Diğer Bölüm Optimizasyonları */
+            #program-details h2 {
+                font-size: 2em;
+            }
+            .image-gallery { 
+                grid-template-columns: 1fr; 
+            }
         }
     </style>
 </head>
@@ -213,7 +289,12 @@
                     <h1>FITLIFE</h1>
                 </a>
             </div>
-            <nav>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-label="Menü Aç/Kapa">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="main-nav">
                 <ul>
                     <li><a href="index.html#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
@@ -301,16 +382,19 @@
 
             const currentScrollY = window.scrollY;
 
-            // Aşağı kaydırılıyor VE header başlangıç pozisyonundan ayrılmış
             if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
                 header.classList.add('header-hidden');
-            } 
-            // Yukarı kaydırılıyor VEYA sayfanın en üstüne yaklaşıldı
-            else if (currentScrollY < lastScrollY || currentScrollY < 10) {
+            } else if (currentScrollY < lastScrollY || currentScrollY < 10) {
                 header.classList.remove('header-hidden');
             }
             
             lastScrollY = currentScrollY;
+        });
+
+        // MOBİL HAMBURGER MENÜ TOGGLE
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
         });
     </script>
 </body>
