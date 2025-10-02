@@ -41,7 +41,7 @@
         }
 
         /* ----------------------------------- */
-        /* BAŞLIK VE NAVİGASYON */
+        /* BAŞLIK VE NAVİGASYON (Sticky dahil) */
         /* ----------------------------------- */
         header {
             background: var(--dark-bg);
@@ -49,6 +49,11 @@
             padding: 15px 0;
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            
+            /* SABİT BAŞLIK (STICKY HEADER) */
+            position: sticky; 
+            top: 0;           
+            z-index: 1000;    
         }
 
         header a {
@@ -114,7 +119,7 @@
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box; /* Padding'in genişliğe dahil olmasını sağlar */
+            box-sizing: border-box; 
             font-family: var(--font-family);
         }
 
@@ -180,7 +185,7 @@
                 <ul>
                     <li><a href="index.html#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
-                    <li><a href="index.html#egitmenler">Eğitmenler</a></li>
+                    <li><a href="sss.html">SSS</a></li> 
                     <li><a href="iletisim.html" class="btn btn-primary">Hemen Başla</a></li>
                 </ul>
             </nav>
@@ -193,7 +198,7 @@
                 <h2>Bize Ulaşın ve Hemen Başlayın!</h2>
                 <p style="text-align: center; margin-bottom: 25px;">Tüm sorularınız için formu doldurun veya size özel bir program talebinde bulunun. En kısa sürede dönüş yapacağız!</p>
                 
-                <form action="https://formspree.io/f/mqaybqwn" method="POST">
+                <form action="Formspree_URL_NİZİ_BURAYA_YAZIN" method="POST">
                     
                     <label for="name">Adınız Soyadınız *</label>
                     <input type="text" id="name" name="Ad Soyad" required>

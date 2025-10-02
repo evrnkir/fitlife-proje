@@ -30,14 +30,14 @@
         }
 
         .container {
-            width: 90%; /* Geniş ekranlarda daha fazla yer kaplasın */
+            width: 90%; 
             max-width: 1200px;
             margin: auto;
             overflow: hidden;
         }
         
         .section-padding {
-            padding: 60px 0; /* Daha ferah bir görüntü */
+            padding: 60px 0; 
         }
 
         /* ----------------------------------- */
@@ -49,6 +49,11 @@
             padding: 15px 0;
             border-bottom: var(--primary-color) 4px solid;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            
+            /* SABİT BAŞLIK (STICKY HEADER) */
+            position: sticky; 
+            top: 0;           
+            z-index: 1000;    
         }
 
         header a {
@@ -87,7 +92,7 @@
             padding: 12px 25px;
             border: none;
             cursor: pointer;
-            border-radius: 50px; /* Daha modern yuvarlak butonlar */
+            border-radius: 50px; 
             font-weight: bold;
             text-transform: uppercase;
             text-align: center;
@@ -127,7 +132,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5); /* Daha koyu maske */
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.5); 
         }
 
         #hero h2 {
@@ -272,7 +277,7 @@
                 width: 100%;
             }
             header li {
-                display: block; /* Menü dikey hale gelsin */
+                display: block; 
                 padding: 5px 0;
             }
             header nav ul {
@@ -288,7 +293,7 @@
             }
 
             .program-grid {
-                grid-template-columns: 1fr; /* Tek sütunlu hale gelsin */
+                grid-template-columns: 1fr; 
             }
         }
     </style>
@@ -304,6 +309,7 @@
                 <ul>
                     <li><a href="index.html#programlar">Antrenman Programları</a></li>
                     <li><a href="beslenme.html">Beslenme</a></li>
+                    <li><a href="sss.html">SSS</a></li>
                     <li><a href="iletisim.html" class="btn btn-primary">Hemen Başla</a></li>
                 </ul>
             </nav>
