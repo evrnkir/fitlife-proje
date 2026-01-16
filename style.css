@@ -1,0 +1,83 @@
+/* CTA / NEWSLETTER BÖLÜMÜ */
+.cta-section {
+    background-color: #1a1a1a; /* Koyu gri arka plan */
+    padding: 60px 20px;
+    text-align: center;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    margin-top: 40px;
+}
+
+.cta-section h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cta-section p {
+    color: #cccccc;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* FORM TASARIMI */
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Mobilde alt alta geçmesi için */
+}
+
+.newsletter-form input[type="email"] {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: 2px solid #444;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+    width: 300px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.newsletter-form input[type="email"]:focus {
+    border-color: #e33030; /* Odaklanınca kırmızı çerçeve */
+}
+
+.btn-primary {
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #e33030; /* Dikkat çekici kırmızı/turuncu */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #c12525; /* Hover efekti */
+}
+
+.spam-notice {
+    display: block;
+    margin-top: 15px;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* MOBİL UYUMLULUK */
+@media (max-width: 600px) {
+    .newsletter-form input[type="email"] {
+        width: 100%;
+    }
+    .btn-primary {
+        width: 100%;
+    }
+}
